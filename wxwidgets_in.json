@@ -1,0 +1,1459 @@
+
+
+{
+    "if": {
+       "@cond": "FORMAT in ['borland','mingw','msvc','watcom']",
+       "define-rule": {
+          "@name": "__mm-to-$(OBJEXT[1:])",
+          "@extends": "__any,compilation_rule"
+       }
+    },
+    "set": [
+       {
+          "@var": "BASE_UNIX_AND_DARWIN_SRC",
+          "@hints": "files",
+          "#text": "src/common/fdiodispatcher.cpp\n    src/common/selectdispatcher.cpp\n    src/unix/appunix.cpp\n    src/unix/dir.cpp\n    src/unix/dlunix.cpp\n    src/unix/epolldispatcher.cpp\n    src/unix/evtloopunix.cpp\n    src/unix/fdiounix.cpp\n    src/unix/snglinst.cpp\n    src/unix/stackwalk.cpp\n    src/unix/timerunx.cpp\n    src/unix/threadpsx.cpp\n    src/unix/utilsunx.cpp\n    src/unix/wakeuppipe.cpp\n    src/unix/fswatcher_kqueue.cpp"
+       },
+       {
+          "@var": "BASE_UNIX_AND_DARWIN_HDR",
+          "@hints": "files",
+          "#text": "wx/unix/app.h\n    wx/unix/apptbase.h\n    wx/unix/apptrait.h\n    wx/unix/chkconf.h\n    wx/unix/evtloop.h\n    wx/unix/evtloopsrc.h\n    wx/unix/pipe.h\n    wx/unix/stackwalk.h\n    wx/unix/tls.h\n    wx/unix/fswatcher_kqueue.h"
+       },
+       {
+          "@var": "BASE_UNIX_AND_DARWIN_NOTWXMAC_SRC",
+          "@hints": "files",
+          "#text": "$(BASE_UNIX_AND_DARWIN_SRC)\n    src/unix/mimetype.cpp"
+       },
+       {
+          "@var": "BASE_UNIX_AND_DARWIN_NOTWXMAC_HDR",
+          "@hints": "files",
+          "#text": "$(BASE_UNIX_AND_DARWIN_HDR)\n    wx/unix/mimetype.h"
+       },
+       {
+          "@var": "BASE_UNIX_SRC",
+          "@hints": "files",
+          "#text": "$(BASE_UNIX_AND_DARWIN_NOTWXMAC_SRC)\n    src/unix/fswatcher_inotify.cpp\n    src/unix/stdpaths.cpp\n    src/unix/secretstore.cpp"
+       },
+       {
+          "@var": "BASE_UNIX_HDR",
+          "@hints": "files",
+          "#text": "$(BASE_UNIX_AND_DARWIN_NOTWXMAC_HDR)\n    wx/unix/fswatcher_inotify.h\n    wx/unix/stdpaths.h"
+       },
+       {
+          "@var": "BASE_WIN32_SRC",
+          "@hints": "files",
+          "#text": "src/msw/basemsw.cpp\n    src/msw/crashrpt.cpp\n    src/msw/debughlp.cpp\n    src/msw/dde.cpp\n    src/msw/dir.cpp\n    src/msw/dlmsw.cpp\n    src/msw/evtloopconsole.cpp\n    src/msw/mimetype.cpp\n    src/msw/power.cpp\n    src/msw/regconf.cpp\n    src/msw/registry.cpp\n    src/msw/snglinst.cpp\n    src/msw/stackwalk.cpp\n    src/msw/stdpaths.cpp\n    src/msw/thread.cpp\n    src/msw/timer.cpp\n    src/msw/utils.cpp\n    src/msw/utilsexc.cpp\n    src/msw/fswatcher.cpp\n    src/msw/secretstore.cpp"
+       },
+       {
+          "@var": "BASE_AND_GUI_WIN32_SRC",
+          "@hints": "files",
+          "#text": "src/msw/main.cpp\n    src/msw/volume.cpp"
+       },
+       {
+          "@var": "BASE_WIN32_HDR",
+          "@hints": "files",
+          "#text": "wx/msw/apptrait.h\n    wx/msw/apptbase.h\n    wx/msw/chkconf.h\n    wx/msw/crashrpt.h\n    wx/msw/dde.h\n    wx/msw/debughlp.h\n    wx/msw/evtloopconsole.h\n    wx/msw/gccpriv.h\n    wx/msw/libraries.h\n    wx/msw/mimetype.h\n    wx/msw/private.h\n    wx/msw/regconf.h\n    wx/msw/registry.h\n    wx/msw/seh.h\n    wx/msw/stackwalk.h\n    wx/msw/stdpaths.h\n    wx/msw/winundef.h\n    wx/msw/winver.h\n    wx/msw/wrapcctl.h\n    wx/msw/wrapcdlg.h\n    wx/msw/wrapwin.h\n    wx/msw/fswatcher.h"
+       },
+       {
+          "@var": "BASE_COREFOUNDATION_SRC",
+          "@hints": "files",
+          "#text": "src/osx/core/cfstring.cpp\n    src/osx/core/evtloop_cf.cpp\n    src/osx/core/strconv_cf.cpp\n    src/osx/cocoa/utils_base.mm\n    src/osx/core/secretstore.cpp"
+       },
+       {
+          "@var": "BASE_COREFOUNDATION_HDR",
+          "@hints": "files",
+          "#text": "wx/osx/core/cfdataref.h\n    wx/osx/core/cfref.h\n    wx/osx/core/cfstring.h\n    wx/osx/core/hid.h\n    wx/osx/core/evtloop.h\n    wx/osx/core/objcid.h\n    wx/osx/core/private.h\n    wx/osx/core/colour.h\n    wx/osx/carbon/region.h\n    wx/osx/core/cfdictionary.h\n    wx/osx/core/cfarray.h\n    wx/osx/core/cftype.h\n    wx/osx/core/joystick.h\n    wx/osx/core/mimetype.h\n    wx/osx/core/dataview.h"
+       },
+       {
+          "@var": "BASE_OSX_SHARED_SRC",
+          "@hints": "files",
+          "#text": "src/osx/core/mimetype.cpp\n    $(BASE_COREFOUNDATION_SRC)\n    $(BASE_UNIX_AND_DARWIN_SRC)\n    src/osx/fswatcher_fsevents.cpp\n    src/osx/cocoa/stdpaths.mm"
+       },
+       {
+          "@var": "BASE_OSX_SHARED_HDR",
+          "@hints": "files",
+          "#text": "$(BASE_COREFOUNDATION_HDR)\n    $(BASE_UNIX_AND_DARWIN_HDR)\n    wx/osx/fswatcher_fsevents.h"
+       },
+       {
+          "@var": "BASE_AND_GUI_OSX_COCOA_SRC",
+          "@hints": "files",
+          "#text": "src/osx/cocoa/power.mm\n    src/osx/cocoa/utils.mm"
+       },
+       {
+          "@var": "BASE_OSX_NOTWXMAC_SRC",
+          "@hints": "files",
+          "#text": "$(BASE_UNIX_AND_DARWIN_NOTWXMAC_SRC)\n    $(BASE_COREFOUNDATION_SRC)"
+       },
+       {
+          "@var": "BASE_OSX_NOTWXMAC_HDR",
+          "@hints": "files",
+          "#text": "$(BASE_UNIX_AND_DARWIN_NOTWXMAC_HDR)\n    $(BASE_COREFOUNDATION_HDR)"
+       },
+       {
+          "@var": "QT_WIN32_SRC",
+          "@hints": "files",
+          "#text": "src/msw/ole/comimpl.cpp\n    src/msw/dialup.cpp\n    src/msw/dib.cpp\n    src/msw/joystick.cpp\n    src/msw/ole/oleutils.cpp\n    src/msw/ole/uuid.cpp\n    src/msw/ole/safearray.cpp\n    src/msw/sound.cpp\n    src/msw/ole/automtn.cpp\n    src/qt/graphics.cpp"
+       },
+       {
+          "@var": "QT_WIN32_HDR",
+          "@hints": "files",
+          "#text": "wx/msw/dib.h\n    wx/msw/ole/automtn.h\n    wx/msw/joystick.h\n    wx/msw/sound.h\n    wx/msw/ole/safearray.h\n    wx/msw/ole/oleutils.h\n    wx/msw/ole/comimpl.h\n    wx/msw/ole/uuid.h"
+       },
+       {
+          "@var": "QT_PLATFORM_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "PLATFORM_WIN32=='1'",
+             "#text": "$(QT_WIN32_SRC)"
+          }
+       },
+       {
+          "@var": "QT_PLATFORM_HDR",
+          "@hints": "files",
+          "if": {
+             "@cond": "PLATFORM_WIN32=='1'",
+             "#text": "$(QT_WIN32_HDR)"
+          }
+       },
+       {
+          "@var": "QT_HDR",
+          "@hints": "files",
+          "#text": "wx/qt/accel.h\n    wx/qt/app.h\n    wx/qt/bitmap.h\n    wx/qt/bmpbuttn.h\n    wx/qt/brush.h\n    wx/qt/anybutton.h\n    wx/qt/button.h\n    wx/qt/checkbox.h\n    wx/qt/checklst.h\n    wx/qt/choice.h\n    wx/qt/clipbrd.h\n    wx/qt/clrpicker.h\n    wx/generic/collpaneg.h\n    wx/qt/colordlg.h\n    wx/qt/colour.h\n    wx/qt/combobox.h\n    wx/qt/control.h\n    wx/qt/ctrlsub.h\n    wx/qt/cursor.h\n    wx/qt/dataform.h\n    wx/qt/dataobj2.h\n    wx/qt/dataobj.h\n    wx/qt/dcclient.h\n    wx/qt/dc.h\n    wx/qt/dcmemory.h\n    wx/qt/dcprint.h\n    wx/qt/dcscreen.h\n    wx/qt/defs.h\n    wx/qt/dialog.h\n    wx/qt/dirdlg.h\n    wx/qt/dnd.h\n    wx/qt/evtloop.h\n    wx/qt/filedlg.h\n    wx/qt/font.h\n    wx/qt/fontdlg.h\n    wx/qt/frame.h\n    wx/qt/gauge.h\n    wx/generic/icon.h\n    wx/generic/imaglist.h\n    wx/qt/listbox.h\n    wx/qt/listctrl.h\n    wx/qt/mdi.h\n    wx/qt/menu.h\n    wx/qt/menuitem.h\n    wx/qt/minifram.h\n    wx/qt/msgdlg.h\n    wx/qt/nonownedwnd.h\n    wx/qt/notebook.h\n    wx/qt/palette.h\n    wx/qt/pen.h\n    wx/qt/popupwin.h\n    wx/qt/printdlg.h\n    wx/generic/prntdlgg.h\n    wx/qt/printqt.h\n    wx/qt/radiobox.h\n    wx/qt/radiobut.h\n    wx/qt/region.h\n    wx/qt/scrolbar.h\n    wx/qt/slider.h\n    wx/qt/spinbutt.h\n    wx/qt/spinctrl.h\n    wx/qt/statbmp.h\n    wx/qt/statbox.h\n    wx/qt/statline.h\n    wx/qt/statusbar.h\n    wx/qt/stattext.h\n    wx/qt/textctrl.h\n    wx/qt/textentry.h\n    wx/qt/tglbtn.h\n    wx/qt/toolbar.h\n    wx/qt/tooltip.h\n    wx/qt/toplevel.h\n    wx/qt/window.h\n    wx/generic/fdrepdlg.h\n    wx/generic/filepickerg.h\n    wx/generic/clrpickerg.h\n    wx/generic/fontpickerg.h\n    wx/generic/caret.h\n    wx/qt/calctrl.h\n    wx/qt/dvrenderer.h\n    wx/qt/taskbar.h\n    wx/generic/activityindicator.h\n    wx/qt/dataview.h\n    wx/qt/dvrenderers.h\n    $(QT_PLATFORM_HDR)\n    wx/qt/treectrl.h"
+       },
+       {
+          "@var": "QT_SRC",
+          "@hints": "files",
+          "#text": "src/common/taskbarcmn.cpp\n    src/generic/caret.cpp\n    src/generic/clrpickerg.cpp\n    src/generic/collpaneg.cpp\n    src/generic/fdrepdlg.cpp\n    src/generic/filepickerg.cpp\n    src/generic/fontpickerg.cpp\n    src/generic/icon.cpp\n    src/generic/imaglist.cpp\n    src/generic/prntdlgg.cpp\n    src/generic/textmeasure.cpp\n    src/generic/activityindicator.cpp\n    src/qt/accel.cpp\n    src/qt/app.cpp\n    src/qt/apptraits.cpp\n    src/qt/bitmap.cpp\n    src/qt/bmpbuttn.cpp\n    src/qt/brush.cpp\n    src/qt/anybutton.cpp\n    src/qt/button.cpp\n    src/qt/calctrl.cpp\n    src/qt/checkbox.cpp\n    src/qt/checklst.cpp\n    src/qt/choice.cpp\n    src/qt/clipbrd.cpp\n    src/qt/clrpicker.cpp\n    src/qt/colordlg.cpp\n    src/qt/colour.cpp\n    src/qt/combobox.cpp\n    src/qt/control.cpp\n    src/qt/converter.cpp\n    src/qt/ctrlsub.cpp\n    src/qt/cursor.cpp\n    src/qt/dataobj.cpp\n    src/qt/dataview.cpp\n    src/qt/dcclient.cpp\n    src/qt/dc.cpp\n    src/qt/dcmemory.cpp\n    src/qt/dcprint.cpp\n    src/qt/dcscreen.cpp\n    src/qt/defs.cpp\n    src/qt/dialog.cpp\n    src/qt/display.cpp\n    src/qt/dnd.cpp\n    src/qt/dvrenderer.cpp\n    src/qt/dvrenderers.cpp\n    src/qt/evtloop.cpp\n    src/qt/filedlg.cpp\n    src/qt/font.cpp\n    src/qt/fontdlg.cpp\n    src/qt/fontutil.cpp\n    src/qt/fontenum.cpp\n    src/qt/frame.cpp\n    src/qt/gauge.cpp\n    src/qt/listbox.cpp\n    src/qt/listctrl.cpp\n    src/qt/mdi.cpp\n    src/qt/menu.cpp\n    src/qt/menuitem.cpp\n    src/qt/minifram.cpp\n    src/qt/msgdlg.cpp\n    src/qt/notebook.cpp\n    src/qt/palette.cpp\n    src/qt/nonownedwnd.cpp\n    src/qt/pen.cpp\n    src/qt/popupwin.cpp\n    src/qt/printdlg.cpp\n    src/qt/printqt.cpp\n    src/qt/radiobox.cpp\n    src/qt/radiobut.cpp\n    src/qt/region.cpp\n    src/qt/scrolbar.cpp\n    src/qt/settings.cpp\n    src/qt/sockqt.cpp\n    src/qt/slider.cpp\n    src/qt/spinbutt.cpp\n    src/qt/spinctrl.cpp\n    src/qt/statbmp.cpp\n    src/qt/statbox.cpp\n    src/qt/statline.cpp\n    src/qt/stattext.cpp\n    src/qt/statusbar.cpp\n    src/qt/taskbar.cpp\n    src/qt/textctrl.cpp\n    src/qt/textentry.cpp\n    src/qt/tglbtn.cpp\n    src/qt/timer.cpp\n    src/qt/toolbar.cpp\n    src/qt/tooltip.cpp\n    src/qt/toplevel.cpp\n    src/qt/uiaction.cpp\n    src/qt/utils.cpp\n    src/qt/window.cpp\n    $(QT_PLATFORM_SRC)\n    src/qt/treectrl.cpp"
+       },
+       {
+          "@var": "MEDIA_QT_SRC",
+          "@hints": "files",
+          "#text": "src/qt/mediactrl.cpp"
+       },
+       {
+          "@var": "MEDIA_QT_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "NET_QT_SRC",
+          "@hints": "files"
+       },
+       {
+          "@var": "BASE_CMN_SRC",
+          "@hints": "files",
+          "#text": "src/common/any.cpp\n    src/common/appbase.cpp\n    src/common/arcall.cpp\n    src/common/arcfind.cpp\n    src/common/archive.cpp\n    src/common/arrstr.cpp\n    src/common/base64.cpp\n    src/common/clntdata.cpp\n    src/common/cmdline.cpp\n    src/common/config.cpp\n    src/common/convauto.cpp\n    src/common/datetime.cpp\n    src/common/datetimefmt.cpp\n    src/common/datstrm.cpp\n    src/common/dircmn.cpp\n    src/common/dynlib.cpp\n    src/common/dynload.cpp\n    src/common/encconv.cpp\n    src/common/evtloopcmn.cpp\n    src/common/extended.c\n    src/common/ffile.cpp\n    src/common/file.cpp\n    src/common/fileback.cpp\n    src/common/fileconf.cpp\n    src/common/filefn.cpp\n    src/common/filename.cpp\n    src/common/filesys.cpp\n    src/common/filtall.cpp\n    src/common/filtfind.cpp\n    src/common/fmapbase.cpp\n    src/common/fs_arc.cpp\n    src/common/fs_filter.cpp\n    src/common/hash.cpp\n    src/common/hashmap.cpp\n    src/common/init.cpp\n    src/common/intl.cpp\n    src/common/ipcbase.cpp\n    src/common/languageinfo.cpp\n    src/common/list.cpp\n    src/common/log.cpp\n    src/common/longlong.cpp\n    src/common/memory.cpp\n    src/common/mimecmn.cpp\n    src/common/module.cpp\n    src/common/mstream.cpp\n    src/common/numformatter.cpp\n    src/common/object.cpp\n    src/common/platinfo.cpp\n    src/common/powercmn.cpp\n    src/common/process.cpp\n    src/common/regex.cpp\n    src/common/stdpbase.cpp\n    src/common/sstream.cpp\n    src/common/stdstream.cpp\n    src/common/stopwatch.cpp\n    src/common/strconv.cpp\n    src/common/stream.cpp\n    src/common/string.cpp\n    src/common/stringimpl.cpp\n    src/common/stringops.cpp\n    src/common/strvararg.cpp\n    src/common/sysopt.cpp\n    src/common/tarstrm.cpp\n    src/common/textbuf.cpp\n    src/common/textfile.cpp\n    src/common/threadinfo.cpp\n    src/common/time.cpp\n    src/common/timercmn.cpp\n    src/common/timerimpl.cpp\n    src/common/tokenzr.cpp\n    src/common/translation.cpp\n    src/common/txtstrm.cpp\n    src/common/unichar.cpp\n    src/common/uri.cpp\n    src/common/ustring.cpp\n    src/common/variant.cpp\n    src/common/wfstream.cpp\n    src/common/wxcrt.cpp\n    src/common/wxprintf.cpp\n    src/common/xlocale.cpp\n    src/common/xti.cpp\n    src/common/xtistrm.cpp\n    src/common/zipstrm.cpp\n    src/common/zstream.cpp\n    src/common/fswatchercmn.cpp\n    src/generic/fswatcherg.cpp\n    src/common/secretstore.cpp\n    src/common/lzmastream.cpp"
+       },
+       {
+          "@var": "BASE_AND_GUI_CMN_SRC",
+          "@hints": "files",
+          "#text": "src/common/event.cpp\n    src/common/fs_mem.cpp\n    src/common/msgout.cpp\n    src/common/utilscmn.cpp"
+       },
+       {
+          "@var": "BASE_CMN_HDR",
+          "@hints": "files",
+          "#text": "wx/afterstd.h\n    wx/any.h\n    wx/anystr.h\n    wx/app.h\n    wx/apptrait.h\n    wx/archive.h\n    wx/arrimpl.cpp\n    wx/arrstr.h\n    wx/atomic.h\n    wx/base64.h\n    wx/beforestd.h\n    wx/buffer.h\n    wx/build.h\n    wx/chartype.h\n    wx/checkeddelete.h\n    wx/chkconf.h\n    wx/clntdata.h\n    wx/cmdargs.h\n    wx/cmdline.h\n    wx/compiler.h\n    wx/confbase.h\n    wx/config.h\n    wx/convauto.h\n    wx/containr.h\n    wx/cpp.h\n    wx/crt.h\n    wx/datetime.h\n    wx/datstrm.h\n    wx/dde.h\n    wx/debug.h\n    wx/defs.h\n    wx/dir.h\n    wx/dlimpexp.h\n    wx/dlist.h\n    wx/dynarray.h\n    wx/dynlib.h\n    wx/dynload.h\n    wx/encconv.h\n    wx/event.h\n    wx/eventfilter.h\n    wx/evtloop.h\n    wx/evtloopsrc.h\n    wx/except.h\n    wx/features.h\n    wx/flags.h\n    wx/ffile.h\n    wx/file.h\n    wx/fileconf.h\n    wx/filefn.h\n    wx/filename.h\n    wx/filesys.h\n    wx/fontenc.h\n    wx/fontmap.h\n    wx/fs_arc.h\n    wx/fs_filter.h\n    wx/fs_mem.h\n    wx/fs_zip.h\n    wx/hash.h\n    wx/hashmap.h\n    wx/hashset.h\n    wx/iconloc.h\n    wx/init.h\n    wx/intl.h\n    wx/iosfwrap.h\n    wx/ioswrap.h\n    wx/ipc.h\n    wx/ipcbase.h\n    wx/kbdstate.h\n    wx/language.h\n    wx/link.h\n    wx/list.h\n    wx/listimpl.cpp\n    wx/log.h\n    wx/longlong.h\n    wx/math.h\n    wx/memconf.h\n    wx/memory.h\n    wx/memtext.h\n    wx/mimetype.h\n    wx/module.h\n    wx/mousestate.h\n    wx/msgout.h\n    wx/msgqueue.h\n    wx/mstream.h\n    wx/numformatter.h\n    wx/object.h\n    wx/platform.h\n    wx/platinfo.h\n    wx/power.h\n    wx/process.h\n    wx/ptr_scpd.h\n    wx/ptr_shrd.h\n    wx/recguard.h\n    wx/regex.h\n    wx/rtti.h\n    wx/scopedarray.h\n    wx/scopedptr.h\n    wx/scopeguard.h\n    wx/sharedptr.h\n    wx/snglinst.h\n    wx/sstream.h\n    wx/stack.h\n    wx/stackwalk.h\n    wx/stdpaths.h\n    wx/stdstream.h\n    wx/stockitem.h\n    wx/stopwatch.h\n    wx/strconv.h\n    wx/stream.h\n    wx/string.h\n    wx/stringimpl.h\n    wx/stringops.h\n    wx/strvararg.h\n    wx/sysopt.h\n    wx/tarstrm.h\n    wx/textbuf.h\n    wx/textfile.h\n    wx/thread.h\n    wx/thrimpl.cpp\n    wx/time.h\n    wx/timer.h\n    wx/tls.h\n    wx/tokenzr.h\n    wx/tracker.h\n    wx/translation.h\n    wx/txtstrm.h\n    wx/typeinfo.h\n    wx/types.h\n    wx/unichar.h\n    wx/uri.h\n    wx/ustring.h\n    wx/utils.h\n    wx/variant.h\n    wx/vector.h\n    wx/version.h\n    wx/versioninfo.h\n    wx/volume.h\n    wx/weakref.h\n    wx/wfstream.h\n    wx/wx.h\n    wx/wxchar.h\n    wx/wxcrt.h\n    wx/wxcrtbase.h\n    wx/wxcrtvararg.h\n    wx/wxprec.h\n    wx/xlocale.h\n    wx/xti.h\n    wx/xti2.h\n    wx/xtistrm.h\n    wx/xtictor.h\n    wx/xtihandler.h\n    wx/xtiprop.h\n    wx/xtitypes.h\n    wx/zipstrm.h\n    wx/zstream.h\n    wx/meta/convertible.h\n    wx/meta/if.h\n    wx/meta/implicitconversion.h\n    wx/meta/int2type.h\n    wx/meta/movable.h\n    wx/meta/pod.h\n    wx/meta/removeref.h\n    wx/fswatcher.h\n    wx/generic/fswatcher.h\n    wx/secretstore.h\n    wx/lzmastream.h"
+       },
+       {
+          "@var": "NET_UNIX_SRC",
+          "@hints": "files",
+          "#text": "src/common/socketiohandler.cpp\n    src/unix/sockunix.cpp"
+       },
+       {
+          "@var": "NET_OSX_SRC",
+          "@hints": "files",
+          "#text": "src/osx/core/sockosx.cpp"
+       },
+       {
+          "@var": "NET_WIN32_SRC",
+          "@hints": "files",
+          "#text": "src/msw/sockmsw.cpp\n    src/msw/urlmsw.cpp"
+       },
+       {
+          "@var": "NET_WIN32_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "NET_CMN_SRC",
+          "@hints": "files",
+          "#text": "src/common/fs_inet.cpp\n    src/common/ftp.cpp\n    src/common/http.cpp\n    src/common/protocol.cpp\n    src/common/sckaddr.cpp\n    src/common/sckfile.cpp\n    src/common/sckipc.cpp\n    src/common/sckstrm.cpp\n    src/common/socket.cpp\n    src/common/url.cpp"
+       },
+       {
+          "@var": "NET_CMN_HDR",
+          "@hints": "files",
+          "#text": "wx/fs_inet.h\n    wx/protocol/file.h\n    wx/protocol/ftp.h\n    wx/protocol/http.h\n    wx/protocol/log.h\n    wx/protocol/protocol.h\n    wx/sckaddr.h\n    wx/sckipc.h\n    wx/sckstrm.h\n    wx/socket.h\n    wx/url.h"
+       },
+       {
+          "@var": "QA_SRC",
+          "@hints": "files",
+          "#text": "src/common/debugrpt.cpp\n    src/generic/dbgrptg.cpp"
+       },
+       {
+          "@var": "QA_HDR",
+          "@hints": "files",
+          "#text": "wx/debugrpt.h"
+       },
+       {
+          "@var": "GUI_CMN_SRC",
+          "@hints": "files",
+          "#text": "src/common/accelcmn.cpp\n    src/common/accesscmn.cpp\n    src/common/anidecod.cpp\n    src/common/affinematrix2d.cpp\n    src/common/appcmn.cpp\n    src/common/artprov.cpp\n    src/common/artstd.cpp\n    src/common/arttango.cpp\n    src/common/bmpbase.cpp\n    src/common/bmpbtncmn.cpp\n    src/common/bookctrl.cpp\n    src/common/btncmn.cpp\n    src/common/cairo.cpp\n    src/common/checkboxcmn.cpp\n    src/common/checklstcmn.cpp\n    src/common/choiccmn.cpp\n    src/common/clipcmn.cpp\n    src/common/clrpickercmn.cpp\n    src/common/colourcmn.cpp\n    src/common/colourdata.cpp\n    src/common/combocmn.cpp\n    src/common/cmdproc.cpp\n    src/common/cmndata.cpp\n    src/common/containr.cpp\n    src/common/cshelp.cpp\n    src/common/ctrlcmn.cpp\n    src/common/ctrlsub.cpp\n    src/common/dcbase.cpp\n    src/common/dcbufcmn.cpp\n    src/common/dcgraph.cpp\n    src/common/dcsvg.cpp\n    src/common/dirctrlcmn.cpp\n    src/common/dlgcmn.cpp\n    src/common/dndcmn.cpp\n    src/common/dobjcmn.cpp\n    src/common/docmdi.cpp\n    src/common/docview.cpp\n    src/common/dpycmn.cpp\n    src/common/dseldlg.cpp\n    src/common/effects.cpp\n    src/common/fddlgcmn.cpp\n    src/common/filectrlcmn.cpp\n    src/common/filehistorycmn.cpp\n    src/common/filepickercmn.cpp\n    src/common/fontpickercmn.cpp\n    src/common/fldlgcmn.cpp\n    src/common/fontcmn.cpp\n    src/common/fontdata.cpp\n    src/generic/graphicc.cpp\n    src/common/fontenumcmn.cpp\n    src/common/fontmap.cpp\n    src/common/fontutilcmn.cpp\n    src/common/framecmn.cpp\n    src/common/gaugecmn.cpp\n    src/common/gbsizer.cpp\n    src/common/gdicmn.cpp\n    src/common/geometry.cpp\n    src/common/gifdecod.cpp\n    src/common/graphcmn.cpp\n    src/common/headercolcmn.cpp\n    src/common/headerctrlcmn.cpp\n    src/common/helpbase.cpp\n    src/common/iconbndl.cpp\n    src/common/imagall.cpp\n    src/common/imagbmp.cpp\n    src/common/image.cpp\n    src/common/imagfill.cpp\n    src/common/imaggif.cpp\n    src/common/imagiff.cpp\n    src/common/imagjpeg.cpp\n    src/common/imagpcx.cpp\n    src/common/imagpng.cpp\n    src/common/imagpnm.cpp\n    src/common/imagtga.cpp\n    src/common/imagtiff.cpp\n    src/common/imagxpm.cpp\n    src/common/layout.cpp\n    src/common/lboxcmn.cpp\n    src/common/listctrlcmn.cpp\n    src/common/markupparser.cpp\n    src/common/matrix.cpp\n    src/common/menucmn.cpp\n    src/common/modalhook.cpp\n    src/common/mousemanager.cpp\n    src/common/nbkbase.cpp\n    src/common/overlaycmn.cpp\n    src/common/ownerdrwcmn.cpp\n    src/common/paper.cpp\n    src/common/panelcmn.cpp\n    src/common/persist.cpp\n    src/common/pickerbase.cpp\n    src/common/popupcmn.cpp\n    src/common/preferencescmn.cpp\n    src/common/prntbase.cpp\n    src/common/quantize.cpp\n    src/common/radiobtncmn.cpp\n    src/common/radiocmn.cpp\n    src/common/rearrangectrl.cpp\n    src/common/rendcmn.cpp\n    src/common/rgncmn.cpp\n    src/common/scrolbarcmn.cpp\n    src/common/settcmn.cpp\n    src/common/sizer.cpp\n    src/common/slidercmn.cpp\n    src/common/spinbtncmn.cpp\n    src/common/spinctrlcmn.cpp\n    src/common/srchcmn.cpp\n    src/common/statbar.cpp\n    src/common/statbmpcmn.cpp\n    src/common/statboxcmn.cpp\n    src/common/statlinecmn.cpp\n    src/common/stattextcmn.cpp\n    src/common/stockitem.cpp\n    src/common/tbarbase.cpp\n    src/common/textcmn.cpp\n    src/common/textentrycmn.cpp\n    src/common/textmeasurecmn.cpp\n    src/common/toplvcmn.cpp\n    src/common/treebase.cpp\n    src/common/uiactioncmn.cpp\n    src/common/valgen.cpp\n    src/common/validate.cpp\n    src/common/valtext.cpp\n    src/common/valnum.cpp\n    src/common/wincmn.cpp\n    src/common/windowid.cpp\n    src/common/wrapsizer.cpp\n    src/common/xpmdecod.cpp\n    src/generic/animateg.cpp\n    src/generic/busyinfo.cpp\n    src/generic/buttonbar.cpp\n    src/generic/choicdgg.cpp\n    src/generic/choicbkg.cpp\n    src/generic/collheaderctrlg.cpp\n    src/generic/combog.cpp\n    src/generic/dcpsg.cpp\n    src/generic/dirctrlg.cpp\n    src/generic/dragimgg.cpp\n    src/generic/filectrlg.cpp\n    src/generic/headerctrlg.cpp\n    src/generic/infobar.cpp\n    src/generic/listbkg.cpp\n    src/generic/logg.cpp\n    src/generic/markuptext.cpp\n    src/generic/msgdlgg.cpp\n    src/generic/numdlgg.cpp\n    src/generic/progdlgg.cpp\n    src/generic/preferencesg.cpp\n    src/generic/printps.cpp\n    src/generic/renderg.cpp\n    src/generic/richmsgdlgg.cpp\n    src/generic/scrlwing.cpp\n    src/generic/selstore.cpp\n    src/generic/spinctlg.cpp\n    src/generic/splitter.cpp\n    src/generic/srchctlg.cpp\n    src/generic/statbmpg.cpp\n    src/generic/stattextg.cpp\n    src/generic/textdlgg.cpp\n    src/generic/tipwin.cpp\n    src/generic/toolbkg.cpp\n    src/generic/treectlg.cpp\n    src/generic/treebkg.cpp\n    src/generic/vlbox.cpp\n    src/generic/vscroll.cpp\n    src/xrc/xmlreshandler.cpp\n    src/generic/splash.cpp\n    src/generic/notifmsgg.cpp\n    src/generic/odcombo.cpp\n    src/common/calctrlcmn.cpp\n    src/generic/grideditors.cpp\n    src/common/bmpcboxcmn.cpp\n    src/generic/grid.cpp\n    src/generic/gridctrl.cpp\n    src/generic/hyperlinkg.cpp\n    src/generic/helpext.cpp\n    src/generic/sashwin.cpp\n    src/generic/gridsel.cpp\n    src/common/addremovectrl.cpp\n    src/generic/tipdlg.cpp\n    src/generic/aboutdlgg.cpp\n    src/common/gridcmn.cpp\n    src/common/richtooltipcmn.cpp\n    src/generic/datectlg.cpp\n    src/generic/bannerwindow.cpp\n    src/generic/treelist.cpp\n    src/common/datavcmn.cpp\n    src/common/animatecmn.cpp\n    src/common/odcombocmn.cpp\n    src/common/hyperlnkcmn.cpp\n    src/generic/propdlg.cpp\n    src/generic/bmpcboxg.cpp\n    src/generic/richtooltipg.cpp\n    src/generic/timectrlg.cpp\n    src/generic/commandlinkbuttong.cpp\n    src/common/notifmsgcmn.cpp\n    src/generic/wizard.cpp\n    src/generic/datavgen.cpp\n    src/generic/editlbox.cpp\n    src/generic/laywin.cpp\n    src/generic/calctrlg.cpp\n    src/generic/rowheightcache.cpp"
+       },
+       {
+          "@var": "GUI_CMN_HDR",
+          "@hints": "files",
+          "#text": "wx/affinematrix2dbase.h\n    wx/affinematrix2d.h\n    wx/anybutton.h\n    wx/bmpbuttn.h\n    wx/brush.h\n    wx/button.h\n    wx/checkbox.h\n    wx/checklst.h\n    wx/choicdlg.h\n    wx/choice.h\n    wx/cmndata.h\n    wx/collpane.h\n    wx/combo.h\n    wx/combobox.h\n    wx/compositewin.h\n    wx/control.h\n    wx/ctrlsub.h\n    wx/cursor.h\n    wx/custombgwin.h\n    wx/dc.h\n    wx/dcclient.h\n    wx/dcgraph.h\n    wx/dcmemory.h\n    wx/dcprint.h\n    wx/dcscreen.h\n    wx/dcsvg.h\n    wx/dialog.h\n    wx/dirdlg.h\n    wx/dragimag.h\n    wx/encinfo.h\n    wx/filedlg.h\n    wx/frame.h\n    wx/gauge.h\n    wx/gbsizer.h\n    wx/gdicmn.h\n    wx/generic/accel.h\n    wx/generic/animate.h\n    wx/generic/buttonbar.h\n    wx/generic/choicdgg.h\n    wx/generic/combo.h\n    wx/generic/custombgwin.h\n    wx/generic/dcpsg.h\n    wx/generic/dirctrlg.h\n    wx/generic/dragimgg.h\n    wx/generic/filectrlg.h\n    wx/generic/headerctrlg.h\n    wx/generic/infobar.h\n    wx/generic/logg.h\n    wx/generic/msgdlgg.h\n    wx/generic/numdlgg.h\n    wx/generic/notebook.h\n    wx/generic/panelg.h\n    wx/generic/prntdlgg.h\n    wx/generic/printps.h\n    wx/generic/progdlgg.h\n    wx/generic/richmsgdlgg.h\n    wx/generic/scrolwin.h\n    wx/generic/spinctlg.h\n    wx/generic/splitter.h\n    wx/generic/srchctlg.h\n    wx/generic/statbmpg.h\n    wx/generic/stattextg.h\n    wx/generic/textdlgg.h\n    wx/generic/treectlg.h\n    wx/graphics.h\n    wx/headercol.h\n    wx/headerctrl.h\n    wx/helphtml.h\n    wx/icon.h\n    wx/infobar.h\n    wx/itemid.h\n    wx/layout.h\n    wx/listbox.h\n    wx/mdi.h\n    wx/menu.h\n    wx/modalhook.h\n    wx/mousemanager.h\n    wx/msgdlg.h\n    wx/nativewin.h\n    wx/numdlg.h\n    wx/overlay.h\n    wx/palette.h\n    wx/panel.h\n    wx/pen.h\n    wx/position.h\n    wx/preferences.h\n    wx/radiobox.h\n    wx/radiobut.h\n    wx/range.h\n    wx/rearrangectrl.h\n    wx/renderer.h\n    wx/richmsgdlg.h\n    wx/scrolbar.h\n    wx/scrolwin.h\n    wx/selstore.h\n    wx/settings.h\n    wx/sizer.h\n    wx/slider.h\n    wx/statbmp.h\n    wx/statbox.h\n    wx/stattext.h\n    wx/statusbr.h\n    wx/testing.h\n    wx/textcompleter.h\n    wx/textctrl.h\n    wx/textdlg.h\n    wx/textentry.h\n    wx/textwrapper.h\n    wx/toolbar.h\n    wx/validate.h\n    wx/valtext.h\n    wx/valnum.h\n    wx/window.h\n    wx/windowid.h\n    wx/windowptr.h\n    wx/withimages.h\n    wx/wrapsizer.h\n    wx/wupdlock.h\n\n    wx/accel.h\n    wx/access.h\n    wx/anidecod.h\n    wx/animdecod.h\n    wx/appprogress.h\n    wx/artprov.h\n    wx/bitmap.h\n    wx/bookctrl.h\n    wx/busyinfo.h\n    wx/generic/busyinfo.h\n    wx/caret.h\n    wx/choicebk.h\n    wx/clipbrd.h\n    wx/clrpicker.h\n    wx/cmdproc.h\n    wx/colordlg.h\n    wx/colour.h\n    wx/colourdata.h\n    wx/cshelp.h\n    wx/dataobj.h\n    wx/dcmirror.h\n    wx/dcps.h\n    wx/dialup.h\n    wx/dirctrl.h\n    wx/display.h\n    wx/dnd.h\n    wx/docmdi.h\n    wx/docview.h\n    wx/effects.h\n    wx/fdrepdlg.h\n    wx/filectrl.h\n    wx/filehistory.h\n    wx/filepicker.h\n    wx/fontpicker.h\n    wx/fmappriv.h\n    wx/font.h\n    wx/fontdata.h\n    wx/fontdlg.h\n    wx/fontenum.h\n    wx/fontutil.h\n    wx/gdiobj.h\n    wx/geometry.h\n    wx/gifdecod.h\n    wx/help.h\n    wx/helpbase.h\n    wx/helpwin.h\n    wx/iconbndl.h\n    wx/imagbmp.h\n    wx/image.h\n    wx/imaggif.h\n    wx/imagiff.h\n    wx/imagjpeg.h\n    wx/imaglist.h\n    wx/imagpcx.h\n    wx/imagpng.h\n    wx/imagpnm.h\n    wx/imagtga.h\n    wx/imagtiff.h\n    wx/imagxpm.h\n    wx/listbase.h\n    wx/listbook.h\n    wx/listctrl.h\n    wx/matrix.h\n    wx/menuitem.h\n    wx/metafile.h\n    wx/minifram.h\n    wx/nonownedwnd.h\n    wx/notebook.h\n    wx/ownerdrw.h\n    wx/paper.h\n    wx/persist.h\n    wx/persist/bookctrl.h\n    wx/persist/dataview.h\n    wx/persist/splitter.h\n    wx/persist/toplevel.h\n    wx/persist/treebook.h\n    wx/persist/window.h\n    wx/pickerbase.h\n    wx/popupwin.h\n    wx/print.h\n    wx/printdlg.h\n    wx/prntbase.h\n    wx/progdlg.h\n    wx/quantize.h\n    wx/rawbmp.h\n    wx/region.h\n    wx/scopeguard.h\n    wx/simplebook.h\n    wx/spinbutt.h\n    wx/spinctrl.h\n    wx/splitter.h\n    wx/srchctrl.h\n    wx/statline.h\n    wx/taskbarbutton.h\n    wx/tbarbase.h\n    wx/tglbtn.h\n    wx/tipwin.h\n    wx/toolbook.h\n    wx/tooltip.h\n    wx/toplevel.h\n    wx/treebase.h\n    wx/treebook.h\n    wx/treectrl.h\n    wx/uiaction.h\n    wx/valgen.h\n    wx/vidmode.h\n    wx/vlbox.h\n    wx/vms_x_fix.h\n    wx/vscroll.h\n    wx/xpmdecod.h\n    wx/xpmhand.h\n    wx/xrc/xmlreshandler.h\n    wx/systhemectrl.h\n    wx/collheaderctrl.h\n    wx/generic/collheaderctrl.h\n    wx/itemattr.h\n    wx/peninfobase.h\n    wx/dataview.h\n    wx/generic/helpext.h\n    wx/sashwin.h\n    wx/tipdlg.h\n    wx/generic/propdlg.h\n    wx/generic/bmpcbox.h\n    wx/datetimectrl.h\n    wx/grid.h\n    wx/generic/grid.h\n    wx/wizard.h\n    wx/generic/grideditors.h\n    wx/generic/dataview.h\n    wx/generic/wizard.h\n    wx/generic/dvrenderers.h\n    wx/dateevt.h\n    wx/editlbox.h\n    wx/splash.h\n    wx/bmpcbox.h\n    wx/generic/gridctrl.h\n    wx/addremovectrl.h\n    wx/generic/notifmsg.h\n    wx/odcombo.h\n    wx/animate.h\n    wx/generic/hyperlink.h\n    wx/dcbuffer.h\n    wx/joystick.h\n    wx/timectrl.h\n    wx/hyperlink.h\n    wx/generic/aboutdlgg.h\n    wx/taskbar.h\n    wx/generic/timectrl.h\n    wx/commandlinkbutton.h\n    wx/richtooltip.h\n    wx/sound.h\n    wx/generic/laywin.h\n    wx/generic/splash.h\n    wx/generic/calctrlg.h\n    wx/generic/sashwin.h\n    wx/treelist.h\n    wx/notifmsg.h\n    wx/datectrl.h\n    wx/laywin.h\n    wx/generic/gridsel.h\n    wx/aboutdlg.h\n    wx/dvrenderers.h\n    wx/generic/datectrl.h\n    wx/bannerwindow.h\n    wx/activityindicator.h\n    wx/generic/dvrenderer.h\n    wx/calctrl.h\n    wx/propdlg.h"
+       },
+       {
+          "@var": "UNIX_SRC",
+          "@hints": "files",
+          "#text": "src/unix/apptraits.cpp"
+       },
+       {
+          "@var": "XWIN_LOWLEVEL_SRC",
+          "@hints": "files",
+          "#text": "src/generic/caret.cpp\n    src/generic/imaglist.cpp\n    src/unix/dialup.cpp\n    src/unix/fontenum.cpp\n    src/unix/fontutil.cpp\n    src/unix/uiactionx11.cpp\n    src/unix/utilsx11.cpp\n    src/unix/sound.cpp\n    src/common/taskbarcmn.cpp\n    src/unix/joystick.cpp\n    src/unix/taskbarx11.cpp"
+       },
+       {
+          "@var": "XWIN_LOWLEVEL_HDR",
+          "@hints": "files",
+          "#text": "wx/generic/caret.h\n    wx/generic/imaglist.h\n    wx/unix/fontutil.h\n    wx/unix/utilsx11.h\n    wx/unix/sound.h\n    wx/unix/taskbarx11.h\n    wx/unix/joystick.h"
+       },
+       {
+          "@var": "GTK_WIN32_SRC",
+          "@hints": "files",
+          "#text": "src/generic/caret.cpp\n    src/generic/imaglist.cpp\n    src/msw/ole/automtn.cpp\n    src/msw/ole/comimpl.cpp\n    src/msw/ole/oleutils.cpp\n    src/msw/ole/safearray.cpp\n    src/msw/ole/uuid.cpp\n    src/msw/dialup.cpp\n    src/msw/dib.cpp\n    src/msw/display.cpp\n    src/msw/utilswin.cpp\n    src/unix/fontenum.cpp\n    src/unix/fontutil.cpp\n    src/msw/sound.cpp\n    src/msw/joystick.cpp\n    src/common/taskbarcmn.cpp"
+       },
+       {
+          "@var": "GTK_WIN32_HDR",
+          "@hints": "files",
+          "#text": "wx/generic/caret.h\n    wx/generic/imaglist.h\n    wx/msw/ole/automtn.h\n    wx/msw/ole/comimpl.h\n    wx/msw/ole/oleutils.h\n    wx/msw/ole/safearray.h\n    wx/msw/ole/uuid.h\n    wx/msw/dib.h\n    wx/unix/fontutil.h\n    wx/msw/sound.h\n    wx/msw/joystick.h\n    wx/msw/taskbar.h"
+       },
+       {
+          "@var": "GTK_PLATFORM_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "PLATFORM_UNIX=='1'",
+                "#text": "$(XWIN_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "$(XWIN_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "PLATFORM_WIN32=='1'",
+                "#text": "$(GTK_WIN32_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "GTK_PLATFORM_HDR",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "PLATFORM_UNIX=='1'",
+                "#text": "$(XWIN_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "$(XWIN_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "PLATFORM_WIN32=='1'",
+                "#text": "$(GTK_WIN32_HDR)"
+             }
+          ]
+       },
+       {
+          "@var": "GTK_LOWLEVEL_SRC",
+          "@hints": "files",
+          "#text": "$(GTK_PLATFORM_SRC)\n    src/generic/icon.cpp\n    src/generic/paletteg.cpp\n    src/gtk/app.cpp\n    src/gtk/assertdlg_gtk.cpp\n    src/gtk/bitmap.cpp\n    src/gtk/brush.cpp\n    src/gtk/clipbrd.cpp\n    src/gtk/colour.cpp\n    src/gtk/cursor.cpp\n    src/gtk/dataobj.cpp\n    src/gtk/dc.cpp\n    src/gtk/display.cpp\n    src/gtk/dnd.cpp\n    src/gtk/evtloop.cpp\n    src/gtk/filectrl.cpp\n    src/gtk/filehistory.cpp\n    src/gtk/font.cpp\n    src/gtk/image_gtk.cpp\n    src/gtk/sockgtk.cpp\n    src/gtk/minifram.cpp\n    src/gtk/nonownedwnd.cpp\n    src/gtk/pen.cpp\n    src/gtk/popupwin.cpp\n    src/gtk/private.cpp\n    src/gtk/region.cpp\n    src/gtk/renderer.cpp\n    src/gtk/settings.cpp\n    src/gtk/textmeasure.cpp\n    src/gtk/timer.cpp\n    src/gtk/tooltip.cpp\n    src/gtk/toplevel.cpp\n    src/gtk/utilsgtk.cpp\n    src/gtk/win_gtk.cpp\n    src/gtk/window.cpp\n    src/gtk/mimetype.cpp"
+       },
+       {
+          "@var": "GTK2_LOWLEVEL_SRC",
+          "@hints": "files",
+          "#text": "$(GTK_LOWLEVEL_SRC)\n    src/gtk/dcclient.cpp\n    src/gtk/dcmemory.cpp\n    src/gtk/dcscreen.cpp"
+       },
+       {
+          "@var": "GTK_LOWLEVEL_HDR",
+          "@hints": "files",
+          "#text": "$(GTK_PLATFORM_HDR)\n    wx/generic/icon.h\n    wx/generic/paletteg.h\n    wx/gtk/app.h\n    wx/gtk/assertdlg_gtk.h\n    wx/gtk/bitmap.h\n    wx/gtk/brush.h\n    wx/gtk/clipbrd.h\n    wx/gtk/colour.h\n    wx/gtk/cursor.h\n    wx/gtk/dataform.h\n    wx/gtk/dataobj.h\n    wx/gtk/dataobj2.h\n    wx/gtk/dnd.h\n    wx/gtk/evtloop.h\n    wx/gtk/evtloopsrc.h\n    wx/gtk/font.h\n    wx/gtk/filehistory.h\n    wx/gtk/minifram.h\n    wx/gtk/nonownedwnd.h\n    wx/gtk/pen.h\n    wx/gtk/popupwin.h\n    wx/gtk/region.h\n    wx/gtk/tooltip.h\n    wx/gtk/toplevel.h\n    wx/gtk/window.h\n    wx/gtk/mimetype.h"
+       },
+       {
+          "@var": "GTK_SRC",
+          "@hints": "files",
+          "#text": [
+             "src/generic/accel.cpp\n    src/generic/fdrepdlg.cpp",
+             "src/generic/filepickerg.cpp\n    src/generic/listctrl.cpp\n    src/generic/prntdlgg.cpp\n    src/generic/statusbr.cpp",
+             "src/gtk/anybutton.cpp\n    src/gtk/artgtk.cpp\n    src/gtk/bmpbuttn.cpp\n    src/gtk/button.cpp\n    src/gtk/checkbox.cpp\n    src/gtk/checklst.cpp\n    src/gtk/choice.cpp\n    src/gtk/collpane.cpp\n    src/gtk/colordlg.cpp\n    src/gtk/combobox.cpp\n    src/gtk/control.cpp\n    src/gtk/clrpicker.cpp\n    src/gtk/dialog.cpp\n    src/gtk/fontpicker.cpp\n    src/gtk/filepicker.cpp\n    src/gtk/dirdlg.cpp\n    src/gtk/filedlg.cpp\n    src/gtk/fontdlg.cpp\n    src/gtk/frame.cpp\n    src/gtk/gauge.cpp\n    src/gtk/gnome/gvfs.cpp\n    src/gtk/infobar.cpp\n    src/gtk/listbox.cpp\n    src/gtk/mdi.cpp\n    src/gtk/menu.cpp\n    src/gtk/mnemonics.cpp\n    src/gtk/msgdlg.cpp\n    src/gtk/nativewin.cpp\n    src/gtk/notebook.cpp\n    src/gtk/print.cpp\n    src/gtk/radiobox.cpp\n    src/gtk/radiobut.cpp\n    src/gtk/scrolbar.cpp\n    src/gtk/scrolwin.cpp\n    src/gtk/slider.cpp\n    src/gtk/spinbutt.cpp\n    src/gtk/spinctrl.cpp\n    src/gtk/statbmp.cpp\n    src/gtk/statbox.cpp\n    src/gtk/statline.cpp\n    src/gtk/stattext.cpp\n    src/gtk/toolbar.cpp\n    src/gtk/textctrl.cpp\n    src/gtk/textentry.cpp\n    src/gtk/tglbtn.cpp\n    src/gtk/treeentry_gtk.c\n    src/gtk/activityindicator.cpp\n    src/gtk/calctrl.cpp\n    src/gtk/hyperlink.cpp\n    src/gtk/aboutdlg.cpp\n    src/gtk/notifmsg.cpp\n    src/gtk/taskbar.cpp\n    src/gtk/dataview.cpp\n    src/gtk/bmpcbox.cpp\n    src/gtk/animate.cpp\n    src/gtk/srchctrl.cpp"
+          ]
+       },
+       {
+          "@var": "GTK2_SRC",
+          "@hints": "files",
+          "#text": [
+             "$(GTK_SRC)",
+             "src/generic/fontdlgg.cpp\n    src/generic/activityindicator.cpp\n    src/gtk/eggtrayicon.c"
+          ]
+       },
+       {
+          "@var": "GTK_HDR",
+          "@hints": "files",
+          "#text": "wx/generic/fdrepdlg.h\n    wx/generic/filepickerg.h\n    wx/generic/listctrl.h\n    wx/generic/statusbr.h\n    wx/gtk/accel.h\n    wx/gtk/anybutton.h\n    wx/gtk/bmpbuttn.h\n    wx/gtk/button.h\n    wx/gtk/checkbox.h\n    wx/gtk/checklst.h\n    wx/gtk/chkconf.h\n    wx/gtk/collpane.h\n    wx/gtk/colordlg.h\n    wx/gtk/choice.h\n    wx/gtk/combobox.h\n    wx/gtk/control.h\n    wx/gtk/clrpicker.h\n    wx/gtk/dialog.h\n    wx/gtk/dirdlg.h\n    wx/gtk/filectrl.h\n    wx/gtk/filedlg.h\n    wx/gtk/fontpicker.h\n    wx/gtk/filepicker.h\n    wx/gtk/fontdlg.h\n    wx/gtk/frame.h\n    wx/gtk/gauge.h\n    wx/gtk/gnome/gvfs.h\n    wx/gtk/infobar.h\n    wx/gtk/listbox.h\n    wx/gtk/mdi.h\n    wx/gtk/menu.h\n    wx/gtk/menuitem.h\n    wx/gtk/msgdlg.h\n    wx/gtk/notebook.h\n    wx/gtk/print.h\n    wx/gtk/radiobox.h\n    wx/gtk/radiobut.h\n    wx/gtk/scrolbar.h\n    wx/gtk/scrolwin.h\n    wx/gtk/slider.h\n    wx/gtk/spinbutt.h\n    wx/gtk/spinctrl.h\n    wx/gtk/statbmp.h\n    wx/gtk/statbox.h\n    wx/gtk/statline.h\n    wx/gtk/stattext.h\n    wx/gtk/toolbar.h\n    wx/gtk/textctrl.h\n    wx/gtk/textentry.h\n    wx/gtk/tglbtn.h\n    wx/gtk/animate.h\n    wx/gtk/hyperlink.h\n    wx/gtk/taskbar.h\n    wx/gtk/dvrenderers.h\n    wx/generic/activityindicator.h\n    wx/gtk/activityindicator.h\n    wx/gtk/calctrl.h\n    wx/gtk/bmpcbox.h\n    wx/gtk/dataview.h\n    wx/gtk/dvrenderer.h\n    wx/gtk/srchctrl.h"
+       },
+       {
+          "@var": "GTK2_HDR",
+          "@hints": "files",
+          "#text": "$(GTK_HDR)\n    wx/generic/fontdlgg.h"
+       },
+       {
+          "@var": "GTK1_LOWLEVEL_SRC",
+          "@hints": "files",
+          "#text": "$(XWIN_LOWLEVEL_SRC)\n    src/generic/icon.cpp\n    src/generic/paletteg.cpp\n    src/generic/textmeasure.cpp\n    src/gtk1/app.cpp\n    src/gtk1/bitmap.cpp\n    src/gtk1/brush.cpp\n    src/gtk1/clipbrd.cpp\n    src/gtk1/colour.cpp\n    src/gtk1/cursor.cpp\n    src/gtk1/data.cpp\n    src/gtk1/dataobj.cpp\n    src/gtk1/dc.cpp\n    src/gtk1/dcclient.cpp\n    src/gtk1/dcmemory.cpp\n    src/gtk1/dcscreen.cpp\n    src/gtk1/dnd.cpp\n    src/gtk1/evtloop.cpp\n    src/gtk1/font.cpp\n    src/gtk1/sockgtk.cpp\n    src/gtk1/main.cpp\n    src/gtk1/minifram.cpp\n    src/gtk1/pen.cpp\n    src/gtk1/popupwin.cpp\n    src/gtk1/region.cpp\n    src/gtk1/renderer.cpp\n    src/gtk1/settings.cpp\n    src/gtk1/timer.cpp\n    src/gtk1/tooltip.cpp\n    src/gtk1/toplevel.cpp\n    src/gtk1/utilsgtk.cpp\n    src/gtk1/win_gtk.c\n    src/gtk1/window.cpp\n    src/unix/displayx11.cpp"
+       },
+       {
+          "@var": "GTK1_LOWLEVEL_HDR",
+          "@hints": "files",
+          "#text": "$(XWIN_LOWLEVEL_HDR)\n    wx/generic/icon.h\n    wx/generic/paletteg.h\n    wx/gtk1/app.h\n    wx/gtk1/bitmap.h\n    wx/gtk1/brush.h\n    wx/gtk1/clipbrd.h\n    wx/gtk1/colour.h\n    wx/gtk1/cursor.h\n    wx/gtk1/dataform.h\n    wx/gtk1/dataobj.h\n    wx/gtk1/dataobj2.h\n    wx/gtk1/dc.h\n    wx/gtk1/dcclient.h\n    wx/gtk1/dcmemory.h\n    wx/gtk1/dcscreen.h\n    wx/gtk1/dnd.h\n    wx/gtk1/font.h\n    wx/gtk1/minifram.h\n    wx/gtk1/pen.h\n    wx/gtk1/popupwin.h\n    wx/gtk1/region.h\n    wx/gtk1/tooltip.h\n    wx/gtk1/toplevel.h\n    wx/gtk1/win_gtk.h\n    wx/gtk1/window.h"
+       },
+       {
+          "@var": "GTK1_SRC",
+          "@hints": "files",
+          "#text": [
+             "src/generic/accel.cpp\n    src/generic/clrpickerg.cpp\n    src/generic/collpaneg.cpp\n    src/generic/colrdlgg.cpp\n    src/generic/dirdlgg.cpp\n    src/generic/fdrepdlg.cpp\n    src/generic/filedlgg.cpp\n    src/generic/filepickerg.cpp\n    src/generic/fontdlgg.cpp\n    src/generic/fontpickerg.cpp\n    src/generic/listctrl.cpp\n    src/generic/prntdlgg.cpp\n    src/generic/statusbr.cpp",
+             "src/gtk1/bmpbuttn.cpp\n    src/gtk1/button.cpp\n    src/gtk1/checkbox.cpp\n    src/gtk1/checklst.cpp\n    src/gtk1/choice.cpp\n    src/gtk1/combobox.cpp\n    src/gtk1/control.cpp\n    src/gtk1/dialog.cpp\n    src/gtk1/filedlg.cpp\n    src/gtk1/fontdlg.cpp\n    src/gtk1/frame.cpp\n    src/gtk1/gauge.cpp\n    src/gtk1/listbox.cpp\n    src/gtk1/mdi.cpp\n    src/gtk1/menu.cpp\n    src/gtk1/mnemonics.cpp\n    src/gtk1/notebook.cpp\n    src/gtk1/radiobox.cpp\n    src/gtk1/radiobut.cpp\n    src/gtk1/scrolbar.cpp\n    src/gtk1/scrolwin.cpp\n    src/gtk1/slider.cpp\n    src/gtk1/spinbutt.cpp\n    src/gtk1/spinctrl.cpp\n    src/gtk1/statbmp.cpp\n    src/gtk1/statbox.cpp\n    src/gtk1/statline.cpp\n    src/gtk1/stattext.cpp\n    src/gtk1/toolbar.cpp\n    src/gtk1/textctrl.cpp\n    src/gtk1/tglbtn.cpp\n    src/gtk1/taskbar.cpp\n    src/generic/activityindicator.cpp\n    src/gtk1/eggtrayicon.c"
+          ]
+       },
+       {
+          "@var": "GTK1_HDR",
+          "@hints": "files",
+          "#text": "wx/generic/clrpickerg.h\n    wx/generic/collpaneg.h\n    wx/generic/colrdlgg.h\n    wx/generic/dirdlgg.h\n    wx/generic/fdrepdlg.h\n    wx/generic/filedlgg.h\n    wx/generic/filepickerg.h\n    wx/generic/fontdlgg.h\n    wx/generic/fontpickerg.h\n    wx/generic/listctrl.h\n    wx/generic/statusbr.h\n    wx/gtk1/accel.h\n    wx/gtk1/bmpbuttn.h\n    wx/gtk1/button.h\n    wx/gtk1/checkbox.h\n    wx/gtk1/checklst.h\n    wx/gtk1/choice.h\n    wx/gtk1/combobox.h\n    wx/gtk1/control.h\n    wx/gtk1/dialog.h\n    wx/gtk1/filedlg.h\n    wx/gtk1/fontdlg.h\n    wx/gtk1/frame.h\n    wx/gtk1/gauge.h\n    wx/gtk1/listbox.h\n    wx/gtk1/mdi.h\n    wx/gtk1/menu.h\n    wx/gtk1/menuitem.h\n    wx/gtk1/msgdlg.h\n    wx/gtk1/notebook.h\n    wx/gtk1/radiobox.h\n    wx/gtk1/radiobut.h\n    wx/gtk1/scrolbar.h\n    wx/gtk1/scrolwin.h\n    wx/gtk1/slider.h\n    wx/gtk1/spinbutt.h\n    wx/gtk1/spinctrl.h\n    wx/gtk1/statbmp.h\n    wx/gtk1/statbox.h\n    wx/gtk1/statline.h\n    wx/gtk1/stattext.h\n    wx/gtk1/toolbar.h\n    wx/gtk1/textctrl.h\n    wx/gtk1/tglbtn.h\n    wx/gtk1/treectrl.h\n    wx/generic/activityindicator.h"
+       },
+       {
+          "@var": "MOTIF_LOWLEVEL_SRC",
+          "@hints": "files",
+          "#text": "$(XWIN_LOWLEVEL_SRC)\n    src/generic/textmeasure.cpp\n    src/x11/bitmap.cpp\n    src/x11/brush.cpp\n    src/x11/palette.cpp\n    src/x11/pen.cpp\n    src/x11/region.cpp\n    src/x11/utilsx.cpp\n    src/unix/displayx11.cpp"
+       },
+       {
+          "@var": "MOTIF_LOWLEVEL_HDR",
+          "@hints": "files",
+          "#text": "$(XWIN_LOWLEVEL_HDR)\n    wx/x11/bitmap.h\n    wx/x11/brush.h\n    wx/x11/palette.h\n    wx/x11/pen.h\n    wx/x11/region.h"
+       },
+       {
+          "@var": "MOTIF_SRC",
+          "@hints": "files",
+          "#text": [
+             "src/motif/accel.cpp\n    src/motif/app.cpp\n    src/motif/bmpbuttn.cpp\n    src/motif/bmpmotif.cpp\n    src/motif/button.cpp\n    src/motif/checkbox.cpp\n    src/motif/checklst.cpp\n    src/motif/choice.cpp\n    src/motif/clipbrd.cpp\n    src/motif/colour.cpp\n    src/motif/combobox.cpp\n    src/motif/combobox_native.cpp\n    src/motif/control.cpp\n    src/motif/cursor.cpp\n    src/motif/data.cpp\n    src/motif/dataobj.cpp\n    src/motif/dc.cpp\n    src/motif/dcclient.cpp\n    src/motif/dcmemory.cpp\n    src/motif/dcscreen.cpp\n    src/motif/dialog.cpp\n    src/motif/evtloop.cpp\n    src/motif/filedlg.cpp\n    src/motif/font.cpp\n    src/motif/frame.cpp\n    src/motif/gauge.cpp\n    src/motif/sockmot.cpp\n    src/motif/icon.cpp\n    src/motif/listbox.cpp\n    src/motif/main.cpp\n    src/motif/menu.cpp\n    src/motif/menuitem.cpp\n    src/motif/minifram.cpp\n    src/motif/msgdlg.cpp\n    src/motif/popupwin.cpp\n    src/motif/radiobox.cpp\n    src/motif/radiobut.cpp\n    src/motif/scrolbar.cpp\n    src/motif/settings.cpp\n    src/motif/slider.cpp\n    src/motif/spinbutt.cpp\n    src/motif/statbmp.cpp\n    src/motif/statbox.cpp\n    src/motif/stattext.cpp\n    src/motif/textctrl.cpp\n    src/motif/textentry.cpp\n    src/motif/timer.cpp\n    src/motif/toolbar.cpp\n    src/motif/toplevel.cpp\n    src/motif/utils.cpp\n    src/motif/window.cpp\n    src/motif/xmcombo/xmcombo.c",
+             "src/generic/clrpickerg.cpp\n    src/generic/collpaneg.cpp\n    src/generic/colrdlgg.cpp\n    src/generic/dirdlgg.cpp\n    src/generic/fdrepdlg.cpp\n    src/generic/filepickerg.cpp\n    src/generic/fontdlgg.cpp\n    src/generic/fontpickerg.cpp\n    src/generic/listctrl.cpp\n    src/generic/mdig.cpp\n    src/generic/notebook.cpp\n    src/generic/prntdlgg.cpp\n    src/generic/statline.cpp\n    src/generic/statusbr.cpp\n    src/generic/tabg.cpp\n    src/generic/activityindicator.cpp"
+          ]
+       },
+       {
+          "@var": "MOTIF_HDR",
+          "@hints": "files",
+          "#text": "wx/generic/clrpickerg.h\n    wx/generic/collpaneg.h\n    wx/generic/colrdlgg.h\n    wx/generic/ctrlsub.h\n    wx/generic/dirdlgg.h\n    wx/generic/fdrepdlg.h\n    wx/generic/filepickerg.h\n    wx/generic/fontdlgg.h\n    wx/generic/fontpickerg.h\n    wx/generic/listctrl.h\n    wx/generic/mdig.h\n    wx/generic/notebook.h\n    wx/generic/prntdlgg.h\n    wx/generic/statline.h\n    wx/generic/statusbr.h\n    wx/generic/tabg.h\n    wx/motif/accel.h\n    wx/motif/app.h\n    wx/motif/bmpbuttn.h\n    wx/motif/bmpmotif.h\n    wx/motif/button.h\n    wx/motif/checkbox.h\n    wx/motif/checklst.h\n    wx/motif/chkconf.h\n    wx/motif/choice.h\n    wx/motif/clipbrd.h\n    wx/motif/colour.h\n    wx/motif/combobox.h\n    wx/motif/control.h\n    wx/motif/ctrlsub.h\n    wx/motif/cursor.h\n    wx/motif/dataform.h\n    wx/motif/dataobj.h\n    wx/motif/dataobj2.h\n    wx/motif/dc.h\n    wx/motif/dcclient.h\n    wx/motif/dcmemory.h\n    wx/motif/dcprint.h\n    wx/motif/dcscreen.h\n    wx/motif/dialog.h\n    wx/motif/dnd.h\n    wx/motif/filedlg.h\n    wx/motif/font.h\n    wx/motif/frame.h\n    wx/motif/gauge.h\n    wx/motif/icon.h\n    wx/motif/listbox.h\n    wx/motif/menu.h\n    wx/motif/menuitem.h\n    wx/motif/minifram.h\n    wx/motif/msgdlg.h\n    wx/motif/popupwin.h\n    wx/motif/print.h\n    wx/motif/private.h\n    wx/motif/radiobox.h\n    wx/motif/radiobut.h\n    wx/motif/scrolbar.h\n    wx/motif/slider.h\n    wx/motif/spinbutt.h\n    wx/motif/statbmp.h\n    wx/motif/statbox.h\n    wx/motif/stattext.h\n    wx/motif/textctrl.h\n    wx/motif/textentry.h\n    wx/motif/tglbtn.h\n    wx/motif/toolbar.h\n    wx/motif/toplevel.h\n    wx/motif/window.h"
+       },
+       {
+          "@var": "X11_LOWLEVEL_SRC",
+          "@hints": "files",
+          "#text": "$(XWIN_LOWLEVEL_SRC)\n    src/generic/icon.cpp\n    src/generic/textmeasure.cpp\n    src/generic/timer.cpp\n    src/x11/app.cpp\n    src/x11/bitmap.cpp\n    src/x11/brush.cpp\n    src/x11/clipbrd.cpp\n    src/x11/colour.cpp\n    src/x11/cursor.cpp\n    src/x11/data.cpp\n    src/x11/dataobj.cpp\n    src/x11/dc.cpp\n    src/x11/dcclient.cpp\n    src/x11/dcmemory.cpp\n    src/x11/dcscreen.cpp\n    src/x11/evtloop.cpp\n    src/x11/font.cpp\n    src/x11/minifram.cpp\n    src/x11/nanox.c\n    src/x11/palette.cpp\n    src/x11/pen.cpp\n    src/x11/popupwin.cpp\n    src/x11/region.cpp\n    src/x11/reparent.cpp\n    src/x11/settings.cpp\n    src/x11/toplevel.cpp\n    src/x11/utils.cpp\n    src/x11/utilsx.cpp\n    src/x11/window.cpp\n    src/unix/displayx11.cpp"
+       },
+       {
+          "@var": "X11_LOWLEVEL_HDR",
+          "@hints": "files",
+          "#text": "$(XWIN_LOWLEVEL_HDR)\n    wx/generic/icon.h\n    wx/x11/app.h\n    wx/x11/bitmap.h\n    wx/x11/brush.h\n    wx/x11/chkconf.h\n    wx/x11/clipbrd.h\n    wx/x11/colour.h\n    wx/x11/cursor.h\n    wx/x11/dataform.h\n    wx/x11/dataobj.h\n    wx/x11/dataobj2.h\n    wx/x11/dc.h\n    wx/x11/dcclient.h\n    wx/x11/dcmemory.h\n    wx/x11/dcprint.h\n    wx/x11/dcscreen.h\n    wx/x11/dnd.h\n    wx/x11/font.h\n    wx/x11/minifram.h\n    wx/x11/palette.h\n    wx/x11/pen.h\n    wx/x11/popupwin.h\n    wx/x11/print.h\n    wx/x11/private.h\n    wx/x11/privx.h\n    wx/x11/region.h\n    wx/x11/reparent.h\n    wx/x11/textctrl.h\n    wx/x11/toplevel.h\n    wx/x11/window.h"
+       },
+       {
+          "@var": "MSW_LOWLEVEL_SRC",
+          "@hints": "files",
+          "#text": "src/msw/ole/activex.cpp\n    src/msw/app.cpp\n    src/msw/bitmap.cpp\n    src/msw/brush.cpp\n    src/msw/caret.cpp\n    src/msw/clipbrd.cpp\n    src/msw/colour.cpp\n    src/msw/cursor.cpp\n    src/msw/data.cpp\n    src/msw/dc.cpp\n    src/msw/dcclient.cpp\n    src/msw/dcmemory.cpp\n    src/msw/dcprint.cpp\n    src/msw/dcscreen.cpp\n    src/msw/dialup.cpp\n    src/msw/dib.cpp\n    src/msw/display.cpp\n    src/msw/enhmeta.cpp\n    src/msw/font.cpp\n    src/msw/fontenum.cpp\n    src/msw/fontutil.cpp\n    src/msw/gdiimage.cpp\n    src/msw/gdiobj.cpp\n    src/msw/gdiplus.cpp\n    src/msw/graphics.cpp\n    src/msw/icon.cpp\n    src/msw/imaglist.cpp\n    src/msw/minifram.cpp\n    src/msw/nonownedwnd.cpp\n    src/msw/ole/comimpl.cpp\n    src/msw/ole/dataobj.cpp\n    src/msw/ole/dropsrc.cpp\n    src/msw/ole/droptgt.cpp\n    src/msw/ole/oleutils.cpp\n    src/msw/ole/safearray.cpp\n    src/msw/palette.cpp\n    src/msw/pen.cpp\n    src/msw/popupwin.cpp\n    src/msw/printdlg.cpp\n    src/msw/printwin.cpp\n    src/msw/region.cpp\n    src/msw/renderer.cpp\n    src/msw/settings.cpp\n    src/msw/textmeasure.cpp\n    src/msw/tooltip.cpp\n    src/msw/toplevel.cpp\n    src/msw/uiaction.cpp\n    src/msw/utilsgui.cpp\n    src/msw/utilswin.cpp\n    src/msw/uxtheme.cpp\n    src/msw/window.cpp\n    src/msw/graphicsd2d.cpp\n    src/msw/rt/utilsrt.cpp\n    src/common/taskbarcmn.cpp\n    src/msw/helpchm.cpp\n    src/msw/taskbar.cpp\n    src/msw/helpwin.cpp\n    src/msw/joystick.cpp\n    src/msw/aboutdlg.cpp\n    src/msw/notifmsg.cpp\n    src/msw/richtooltip.cpp\n    src/msw/sound.cpp\n    src/msw/ole/automtn.cpp\n    src/msw/rt/notifmsgrt.cpp\n    src/msw/ole/uuid.cpp\n    src/msw/evtloop.cpp\n    src/msw/ole/access.cpp"
+       },
+       {
+          "@var": "MSW_LOWLEVEL_HDR",
+          "@hints": "files",
+          "#text": "wx/msw/nonownedwnd.h\n    wx/msw/ole/activex.h\n    wx/msw/popupwin.h\n    wx/msw/uxtheme.h\n    wx/msw/htmlhelp.h\n    wx/msw/helpwin.h\n    wx/msw/taskbar.h\n    wx/msw/helpchm.h\n    wx/msw/sound.h\n    wx/msw/joystick.h\n    wx/msw/evtloop.h"
+       },
+       {
+          "@var": "MSW_SRC",
+          "@hints": "files",
+          "#text": "src/generic/clrpickerg.cpp\n    src/generic/collpaneg.cpp\n    src/generic/filepickerg.cpp\n    src/generic/fontpickerg.cpp\n    src/generic/statusbr.cpp\n    src/generic/prntdlgg.cpp\n    src/msw/accel.cpp\n    src/msw/anybutton.cpp\n    src/msw/appprogress.cpp\n    src/msw/artmsw.cpp\n    src/msw/bmpbuttn.cpp\n    src/msw/button.cpp\n    src/msw/checkbox.cpp\n    src/msw/choice.cpp\n    src/msw/colordlg.cpp\n    src/msw/combo.cpp\n    src/msw/combobox.cpp\n    src/msw/control.cpp\n    src/msw/dialog.cpp\n    src/msw/dirdlg.cpp\n    src/msw/dragimag.cpp\n    src/msw/filedlg.cpp\n    src/msw/frame.cpp\n    src/msw/gauge.cpp\n    src/msw/headerctrl.cpp\n    src/msw/iniconf.cpp\n    src/msw/listbox.cpp\n    src/msw/listctrl.cpp\n    src/msw/mdi.cpp\n    src/msw/menu.cpp\n    src/msw/menuitem.cpp\n    src/msw/metafile.cpp\n    src/msw/msgdlg.cpp\n    src/msw/nativdlg.cpp\n    src/msw/nativewin.cpp\n    src/msw/notebook.cpp\n    src/msw/ownerdrw.cpp\n    src/msw/progdlg.cpp\n    src/msw/radiobox.cpp\n    src/msw/radiobut.cpp\n    src/msw/richmsgdlg.cpp\n    src/msw/scrolbar.cpp\n    src/msw/slider.cpp\n    src/msw/spinbutt.cpp\n    src/msw/spinctrl.cpp\n    src/msw/statbmp.cpp\n    src/msw/statbox.cpp\n    src/msw/statusbar.cpp\n    src/msw/statline.cpp\n    src/msw/stattext.cpp\n    src/msw/taskbarbutton.cpp\n    src/msw/toolbar.cpp\n    src/msw/textctrl.cpp\n    src/msw/textentry.cpp\n    src/msw/tglbtn.cpp\n    src/msw/treectrl.cpp\n    src/msw/systhemectrl.cpp\n    src/msw/customdraw.cpp\n    src/msw/commandlinkbutton.cpp\n    src/msw/bmpcbox.cpp\n    src/msw/hyperlink.cpp\n    src/msw/calctrl.cpp\n    src/msw/datectrl.cpp\n    src/msw/datetimectrl.cpp\n    src/msw/timectrl.cpp\n    src/msw/datecontrols.cpp\n    src/generic/activityindicator.cpp"
+       },
+       {
+          "@var": "MSW_HDR",
+          "@hints": "files",
+          "#text": "wx/generic/clrpickerg.h\n    wx/generic/collpaneg.h\n    wx/generic/filepickerg.h\n    wx/generic/fontpickerg.h\n    wx/msw/accel.h\n    wx/msw/anybutton.h\n    wx/msw/app.h\n    wx/msw/appprogress.h\n    wx/msw/bitmap.h\n    wx/msw/bmpbuttn.h\n    wx/msw/brush.h\n    wx/msw/button.h\n    wx/msw/caret.h\n    wx/msw/checkbox.h\n    wx/msw/choice.h\n    wx/msw/clipbrd.h\n    wx/msw/colordlg.h\n    wx/msw/colour.h\n    wx/msw/combo.h\n    wx/msw/combobox.h\n    wx/msw/control.h\n    wx/msw/ctrlsub.h\n    wx/msw/cursor.h\n    wx/msw/custombgwin.h\n    wx/msw/dc.h\n    wx/msw/dcclient.h\n    wx/msw/dcmemory.h\n    wx/msw/dcprint.h\n    wx/msw/dcscreen.h\n    wx/msw/dialog.h\n    wx/msw/dib.h\n    wx/msw/dirdlg.h\n    wx/msw/dragimag.h\n    wx/msw/enhmeta.h\n    wx/msw/filedlg.h\n    wx/msw/font.h\n    wx/msw/frame.h\n    wx/msw/gauge.h\n    wx/msw/gdiimage.h\n    wx/msw/headerctrl.h\n    wx/msw/icon.h\n    wx/msw/imaglist.h\n    wx/msw/iniconf.h\n    wx/msw/init.h\n    wx/msw/listbox.h\n    wx/msw/listctrl.h\n    wx/msw/mdi.h\n    wx/msw/menu.h\n    wx/msw/menuitem.h\n    wx/msw/metafile.h\n    wx/msw/minifram.h\n    wx/msw/missing.h\n    wx/msw/msgdlg.h\n    wx/msw/msvcrt.h\n    wx/msw/notebook.h\n    wx/msw/ole/access.h\n    wx/msw/ole/comimpl.h\n    wx/msw/ole/dataform.h\n    wx/msw/ole/dataobj.h\n    wx/msw/ole/dataobj2.h\n    wx/msw/ole/dropsrc.h\n    wx/msw/ole/droptgt.h\n    wx/msw/ole/oleutils.h\n    wx/msw/ole/safearray.h\n    wx/msw/ownerdrw.h\n    wx/msw/ownerdrawnbutton.h\n    wx/msw/palette.h\n    wx/msw/panel.h\n    wx/msw/pen.h\n    wx/msw/printdlg.h\n    wx/msw/printwin.h\n    wx/msw/progdlg.h\n    wx/msw/radiobox.h\n    wx/msw/radiobut.h\n    wx/msw/region.h\n    wx/msw/rcdefs.h\n    wx/msw/richmsgdlg.h\n    wx/msw/scrolbar.h\n    wx/msw/slider.h\n    wx/msw/spinbutt.h\n    wx/msw/spinctrl.h\n    wx/msw/statbmp.h\n    wx/msw/statbox.h\n    wx/msw/statusbar.h\n    wx/msw/statline.h\n    wx/msw/stattext.h\n    wx/msw/taskbarbutton.h\n    wx/msw/toolbar.h\n    wx/msw/textctrl.h\n    wx/msw/textentry.h\n    wx/msw/tglbtn.h\n    wx/msw/tooltip.h\n    wx/msw/toplevel.h\n    wx/msw/treectrl.h\n    wx/msw/window.h\n    wx/msw/rt/utils.h\n    wx/msw/hyperlink.h\n    wx/msw/bmpcbox.h\n    wx/msw/commandlinkbutton.h\n    wx/msw/datetimectrl.h\n    wx/msw/timectrl.h\n    wx/msw/datectrl.h\n    wx/msw/calctrl.h\n    wx/generic/activityindicator.h"
+       },
+       {
+          "@var": "MSW_RSC",
+          "@hints": "files",
+          "#text": [
+             "wx/msw/wx.manifest\n    wx/msw/amd64.manifest\n    wx/msw/ia64.manifest\n    wx/msw/wx.rc",
+             "wx/msw/colours.bmp\n    wx/msw/csquery.bmp",
+             "wx/msw/blank.cur\n    wx/msw/bullseye.cur\n    wx/msw/cross.cur\n    wx/msw/hand.cur\n    wx/msw/magnif1.cur\n    wx/msw/pbrush.cur\n    wx/msw/pencil.cur\n    wx/msw/pntleft.cur\n    wx/msw/pntright.cur\n    wx/msw/roller.cur",
+             "wx/msw/cdrom.ico\n    wx/msw/child.ico\n    wx/msw/computer.ico\n    wx/msw/drive.ico\n    wx/msw/file1.ico\n    wx/msw/floppy.ico\n    wx/msw/folder1.ico\n    wx/msw/folder2.ico\n    wx/msw/mdi.ico\n    wx/msw/question.ico\n    wx/msw/removble.ico\n    wx/msw/std.ico"
+          ]
+       },
+       {
+          "@var": "MSW_DESKTOP_SRC",
+          "@hints": "files",
+          "#text": "src/msw/checklst.cpp\n    src/msw/fdrepdlg.cpp\n    src/msw/fontdlg.cpp"
+       },
+       {
+          "@var": "MSW_DESKTOP_HDR",
+          "@hints": "files",
+          "#text": "wx/msw/checklst.h\n    wx/msw/fdrepdlg.h\n    wx/msw/fontdlg.h\n    wx/msw/ole/automtn.h\n    wx/msw/ole/uuid.h"
+       },
+       {
+          "@var": "DFB_LOWLEVEL_SRC",
+          "@hints": "files",
+          "#text": [
+             "src/common/fontmgrcmn.cpp\n    src/generic/caret.cpp\n    src/generic/colour.cpp\n    src/generic/icon.cpp\n    src/generic/imaglist.cpp\n    src/generic/mask.cpp\n    src/generic/textmeasure.cpp\n    src/dfb/app.cpp\n    src/dfb/bitmap.cpp\n    src/dfb/brush.cpp\n    src/dfb/cursor.cpp",
+             "src/dfb/dc.cpp\n    src/dfb/dcclient.cpp\n    src/dfb/dcmemory.cpp\n    src/dfb/dcscreen.cpp\n    src/dfb/evtloop.cpp\n    src/dfb/font.cpp\n    src/dfb/fontenum.cpp\n    src/dfb/fontmgr.cpp\n    src/dfb/nonownedwnd.cpp\n    src/dfb/overlay.cpp\n    src/dfb/pen.cpp\n    src/dfb/region.cpp\n    src/dfb/settings.cpp\n    src/dfb/toplevel.cpp\n    src/dfb/utils.cpp\n    src/dfb/window.cpp\n    src/dfb/wrapdfb.cpp"
+          ]
+       },
+       {
+          "@var": "DFB_LOWLEVEL_HDR",
+          "@hints": "files",
+          "#text": "wx/generic/caret.h\n    wx/generic/colour.h\n    wx/generic/icon.h\n    wx/generic/imaglist.h\n    wx/generic/mask.h\n    wx/dfb/app.h\n    wx/dfb/bitmap.h\n    wx/dfb/brush.h\n    wx/dfb/chkconf.h\n    wx/dfb/cursor.h\n    wx/dfb/dc.h\n    wx/dfb/dcclient.h\n    wx/dfb/dcmemory.h\n    wx/dfb/dcscreen.h\n    wx/dfb/dfbptr.h\n    wx/dfb/evtloop.h\n    wx/dfb/font.h\n    wx/dfb/nonownedwnd.h\n    wx/dfb/pen.h\n    wx/dfb/popupwin.h\n    wx/dfb/private.h\n    wx/dfb/region.h\n    wx/dfb/toplevel.h\n    wx/dfb/window.h\n    wx/dfb/wrapdfb.h"
+       },
+       {
+          "@var": "OSX_LOWLEVEL_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "PLATFORM_MACOSX=='1'",
+             "#text": [
+                "src/osx/artmac.cpp\n    src/osx/brush.cpp\n    src/osx/dialog_osx.cpp\n    src/osx/fontutil.cpp\n    src/osx/minifram.cpp\n    src/osx/nonownedwnd_osx.cpp\n    src/osx/palette.cpp\n    src/osx/pen.cpp\n    src/osx/toplevel_osx.cpp\n    src/osx/uiaction_osx.cpp\n    src/osx/utils_osx.cpp",
+                "src/osx/window_osx.cpp\n\n    src/osx/core/bitmap.cpp\n    src/osx/core/colour.cpp\n    src/osx/core/dcmemory.cpp\n    src/osx/core/fontenum.cpp\n    src/osx/core/hid.cpp\n    src/osx/core/printmac.cpp\n    src/osx/core/timer.cpp\n    src/osx/core/utilsexc_cf.cpp"
+             ]
+          }
+       },
+       {
+          "@var": "OSX_LOWLEVEL_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "OSX_COMMON_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "PLATFORM_MACOSX=='1'",
+             "#text": [
+                "src/osx/anybutton_osx.cpp\n    src/osx/bmpbuttn_osx.cpp\n    src/osx/button_osx.cpp\n    src/osx/checkbox_osx.cpp\n    src/osx/checklst_osx.cpp\n    src/osx/choice_osx.cpp\n    src/osx/combobox_osx.cpp\n    src/osx/dnd_osx.cpp\n    src/osx/gauge_osx.cpp\n    src/osx/listbox_osx.cpp\n    src/osx/menu_osx.cpp\n    src/osx/menuitem_osx.cpp\n    src/osx/notebook_osx.cpp\n    src/osx/printdlg_osx.cpp\n    src/osx/radiobox_osx.cpp\n    src/osx/radiobut_osx.cpp\n    src/osx/scrolbar_osx.cpp\n    src/osx/slider_osx.cpp\n    src/osx/spinbutt_osx.cpp\n    src/osx/srchctrl_osx.cpp\n    src/osx/statbox_osx.cpp\n    src/osx/statline_osx.cpp\n    src/osx/stattext_osx.cpp\n    src/osx/textentry_osx.cpp\n    src/osx/textctrl_osx.cpp\n    src/osx/tglbtn_osx.cpp\n    src/osx/toolbar_osx.cpp",
+                "src/html/htmlctrl/webkit/webkit.mm",
+                "src/osx/carbon/colordlgosx.mm\n    src/osx/carbon/fontdlgosx.mm",
+                "src/osx/accel.cpp\n    src/osx/carbon/clipbrd.cpp\n    src/osx/carbon/cursor.cpp\n    src/osx/carbon/fontdlg.cpp\n    src/osx/carbon/gdiobj.cpp\n    src/osx/carbon/app.cpp\n    src/osx/carbon/control.cpp\n    src/osx/carbon/dataobj.cpp\n    src/osx/carbon/dcclient.cpp\n    src/osx/carbon/dcprint.cpp\n    src/osx/carbon/dcscreen.cpp\n    src/osx/carbon/graphics.cpp\n    src/osx/carbon/font.cpp\n    src/osx/carbon/frame.cpp\n    src/osx/carbon/mdi.cpp\n    src/osx/carbon/metafile.cpp\n    src/osx/carbon/popupwin.cpp\n    src/osx/carbon/renderer.cpp\n    src/osx/carbon/statbrma.cpp\n    src/osx/carbon/region.cpp",
+                "src/osx/carbon/utilscocoa.mm",
+                "src/generic/caret.cpp\n    src/generic/clrpickerg.cpp\n    src/generic/collpaneg.cpp\n    src/generic/colrdlgg.cpp\n    src/generic/dirdlgg.cpp\n    src/generic/fdrepdlg.cpp\n    src/generic/filedlgg.cpp\n    src/generic/filepickerg.cpp\n    src/generic/fontdlgg.cpp\n    src/generic/fontpickerg.cpp\n    src/generic/listctrl.cpp\n    src/generic/prntdlgg.cpp\n    src/generic/statusbr.cpp\n    src/generic/textmeasure.cpp\n    src/generic/icon.cpp\n    src/osx/statbmp_osx.cpp\n    src/generic/imaglist.cpp"
+             ]
+          }
+       },
+       {
+          "@var": "OSX_SHARED_HDR",
+          "@hints": "files",
+          "#text": [
+             "wx/html/webkit.h",
+             "wx/osx/accel.h\n    wx/osx/anybutton.h\n    wx/osx/app.h\n    wx/osx/bitmap.h\n    wx/osx/bmpbuttn.h\n    wx/osx/brush.h\n    wx/osx/button.h\n    wx/osx/checkbox.h\n    wx/osx/checklst.h\n    wx/osx/chkconf.h\n    wx/osx/choice.h\n    wx/osx/clipbrd.h\n    wx/osx/colordlg.h\n    wx/osx/colour.h\n    wx/osx/combobox.h\n    wx/osx/control.h\n    wx/osx/cursor.h\n    wx/osx/dataform.h\n    wx/osx/dataobj.h\n    wx/osx/dataobj2.h\n    wx/osx/dc.h\n    wx/osx/dcclient.h\n    wx/osx/dcmemory.h\n    wx/osx/dcprint.h\n    wx/osx/dcscreen.h\n    wx/osx/dialog.h\n    wx/osx/dirdlg.h\n    wx/osx/dnd.h\n    wx/osx/evtloop.h\n    wx/osx/evtloopsrc.h\n    wx/osx/filedlg.h\n    wx/osx/font.h\n    wx/osx/fontdlg.h\n    wx/osx/frame.h\n    wx/osx/gauge.h\n    wx/osx/listbox.h\n    wx/osx/mdi.h\n    wx/osx/menu.h\n    wx/osx/menuitem.h\n    wx/osx/metafile.h\n    wx/osx/mimetype.h\n    wx/osx/minifram.h\n    wx/osx/msgdlg.h\n    wx/osx/nonownedwnd.h\n    wx/osx/notebook.h\n    wx/osx/palette.h\n    wx/osx/pen.h\n    wx/osx/popupwin.h\n    wx/osx/printdlg.h\n    wx/osx/printmac.h\n    wx/osx/private.h\n    wx/osx/radiobox.h\n    wx/osx/radiobut.h\n    wx/osx/region.h\n    wx/osx/scrolbar.h\n    wx/osx/slider.h\n    wx/osx/spinbutt.h\n    wx/osx/srchctrl.h\n    wx/osx/statbmp.h\n    wx/osx/statbox.h\n    wx/osx/statline.h\n    wx/osx/stattext.h\n    wx/osx/statusbr.h\n    wx/osx/taskbarosx.h\n    wx/osx/textctrl.h\n    wx/osx/textentry.h\n    wx/osx/tglbtn.h\n    wx/osx/toolbar.h\n    wx/osx/tooltip.h\n    wx/osx/toplevel.h\n    wx/osx/uma.h\n    wx/osx/window.h",
+             "wx/generic/caret.h\n    wx/generic/clrpickerg.h\n    wx/generic/collpaneg.h\n    wx/generic/colrdlgg.h\n    wx/generic/dirdlgg.h\n    wx/generic/fdrepdlg.h\n    wx/generic/filedlgg.h\n    wx/generic/filepickerg.h\n    wx/generic/fontdlgg.h\n    wx/generic/fontpickerg.h\n    wx/generic/listctrl.h\n    wx/generic/prntdlgg.h\n    wx/generic/statusbr.h\n    wx/osx/appprogress.h\n    wx/generic/icon.h\n    wx/generic/imaglist.h"
+          ]
+       },
+       {
+          "@var": "OSX_COCOA_SRC",
+          "@hints": "files",
+          "#text": "$(OSX_COMMON_SRC)\n    src/osx/cocoa/anybutton.mm\n    src/osx/cocoa/appprogress.mm\n    src/osx/cocoa/button.mm\n    src/osx/cocoa/checkbox.mm\n    src/osx/cocoa/choice.mm\n    src/osx/cocoa/colour.mm\n    src/osx/cocoa/combobox.mm\n    src/osx/cocoa/dialog.mm\n    src/osx/cocoa/dirdlg.mm\n    src/osx/cocoa/dnd.mm\n    src/osx/cocoa/evtloop.mm\n    src/osx/cocoa/filedlg.mm\n    src/osx/cocoa/gauge.mm\n    src/osx/cocoa/listbox.mm\n    src/osx/cocoa/menu.mm\n    src/osx/cocoa/menuitem.mm\n    src/osx/cocoa/msgdlg.mm\n    src/osx/cocoa/nativewin.mm\n    src/osx/cocoa/nonownedwnd.mm\n    src/osx/cocoa/notebook.mm\n    src/osx/cocoa/radiobut.mm\n    src/osx/cocoa/preferences.mm\n    src/osx/cocoa/printdlg.mm\n    src/osx/cocoa/scrolbar.mm\n    src/osx/cocoa/slider.mm\n    src/osx/cocoa/spinbutt.mm\n    src/osx/cocoa/srchctrl.mm\n    src/osx/cocoa/statbox.mm\n    src/osx/cocoa/statline.mm\n    src/osx/cocoa/stattext.mm\n    src/osx/cocoa/textctrl.mm\n    src/osx/cocoa/tglbtn.mm\n    src/osx/cocoa/toolbar.mm\n    src/osx/cocoa/tooltip.mm\n    src/osx/cocoa/window.mm\n    src/osx/cocoa/settings.mm\n    src/osx/cocoa/overlay.mm\n    src/osx/cocoa/aboutdlg.mm\n    src/osx/dataview_osx.cpp\n    src/osx/cocoa/notifmsg.mm\n    src/osx/cocoa/taskbar.mm\n    src/osx/datectrl_osx.cpp\n    src/osx/cocoa/datetimectrl.mm\n    src/osx/core/sound.cpp\n    src/osx/sound_osx.cpp\n    src/osx/datetimectrl_osx.cpp\n    src/osx/core/hidjoystick.cpp\n    src/osx/carbon/sound.cpp\n    src/osx/cocoa/dataview.mm\n    src/osx/timectrl_osx.cpp\n    src/common/taskbarcmn.cpp\n    src/osx/cocoa/activityindicator.mm\n    src/osx/cocoa/statbmp.mm\n    src/osx/core/display.cpp"
+       },
+       {
+          "@var": "OSX_COCOA_HDR",
+          "@hints": "files",
+          "#text": "wx/osx/cocoa/chkconf.h\n    wx/osx/cocoa/evtloop.h\n    wx/osx/cocoa/private.h\n    wx/generic/region.h\n    wx/osx/cocoa/stdpaths.h\n    wx/osx/sound.h\n    wx/osx/dvrenderer.h\n    wx/osx/cocoa/dataview.h\n    wx/osx/dvrenderers.h\n    wx/osx/taskbarosx.h\n    wx/osx/activityindicator.h\n    wx/osx/joystick.h\n    wx/osx/dataview.h\n    wx/osx/datectrl.h\n    wx/osx/timectrl.h\n    wx/osx/datetimectrl.h"
+       },
+       {
+          "@var": "OSX_IPHONE_SRC",
+          "@hints": "files",
+          "#text": [
+             "$(OSX_COMMON_SRC)\n    src/generic/regiong.cpp",
+             "src/osx/iphone/anybutton.mm\n    src/osx/iphone/button.mm\n    src/osx/iphone/checkbox.mm\n    src/osx/iphone/dialog.mm\n    src/osx/iphone/evtloop.mm\n    src/osx/iphone/gauge.mm\n    src/osx/iphone/msgdlg.mm\n    src/osx/iphone/nonownedwnd.mm\n    src/osx/iphone/scrolbar.mm\n    src/osx/iphone/slider.mm\n    src/osx/iphone/stattext.mm\n    src/osx/iphone/textctrl.mm\n    src/osx/iphone/toolbar.mm\n    src/osx/iphone/utils.mm\n    src/osx/iphone/window.mm\n    src/osx/iphone/settings.mm\n    src/osx/sound_osx.cpp\n    src/osx/core/sound.cpp\n    src/osx/iphone/statbmp.mm\n    src/osx/iphone/menuitem.mm\n    src/osx/iphone/menu.mm"
+          ]
+       },
+       {
+          "@var": "OSX_IPHONE_HDR",
+          "@hints": "files",
+          "#text": "wx/osx/iphone/chkconf.h\n    wx/osx/iphone/private.h\n    wx/generic/region.h\n    wx/osx/sound.h"
+       },
+       {
+          "@var": "UNIV_THEMES_SRC",
+          "@hints": "files",
+          "#text": "src/univ/themes/gtk.cpp\n    src/univ/themes/metal.cpp\n    src/univ/themes/mono.cpp\n    src/univ/themes/win32.cpp"
+       },
+       {
+          "@var": "UNIV_SRC",
+          "@hints": "files",
+          "#text": "src/generic/accel.cpp\n    src/generic/clrpickerg.cpp\n    src/generic/collpaneg.cpp\n    src/generic/colrdlgg.cpp\n    src/generic/dirdlgg.cpp\n    src/generic/fdrepdlg.cpp\n    src/generic/filedlgg.cpp\n    src/generic/filepickerg.cpp\n    src/generic/fontdlgg.cpp\n    src/generic/fontpickerg.cpp\n    src/generic/listctrl.cpp\n    src/generic/mdig.cpp\n    src/generic/prntdlgg.cpp\n    src/univ/anybutton.cpp\n    src/univ/bmpbuttn.cpp\n    src/univ/button.cpp\n    src/univ/checkbox.cpp\n    src/univ/checklst.cpp\n    src/univ/choice.cpp\n    src/univ/combobox.cpp\n    src/univ/control.cpp\n    src/univ/ctrlrend.cpp\n    src/univ/dialog.cpp\n    src/univ/framuniv.cpp\n    src/univ/gauge.cpp\n    src/univ/inpcons.cpp\n    src/univ/inphand.cpp\n    src/univ/listbox.cpp\n    src/univ/menu.cpp\n    src/univ/notebook.cpp\n    src/univ/radiobox.cpp\n    src/univ/radiobut.cpp\n    src/univ/scrarrow.cpp\n    src/univ/scrolbar.cpp\n    src/univ/scrthumb.cpp\n    src/univ/settingsuniv.cpp\n    src/univ/slider.cpp\n    src/univ/spinbutt.cpp\n    src/univ/statbmp.cpp\n    src/univ/statbox.cpp\n    src/univ/statline.cpp\n    src/univ/stattext.cpp\n    src/univ/statusbr.cpp\n    src/univ/stdrend.cpp\n    src/univ/textctrl.cpp\n    src/univ/tglbtn.cpp\n    src/univ/theme.cpp\n    src/univ/toolbar.cpp\n    src/univ/topluniv.cpp\n    src/univ/winuniv.cpp\n    src/generic/activityindicator.cpp"
+       },
+       {
+          "@var": "UNIV_HDR",
+          "@hints": "files",
+          "#text": "wx/generic/accel.h\n    wx/generic/clrpickerg.h\n    wx/generic/collpaneg.h\n    wx/generic/ctrlsub.h\n    wx/generic/dirdlgg.h\n    wx/generic/fdrepdlg.h\n    wx/generic/filedlgg.h\n    wx/generic/filepickerg.h\n    wx/generic/fontdlgg.h\n    wx/generic/fontpickerg.h\n    wx/generic/listctrl.h\n    wx/generic/mdig.h\n    wx/generic/statusbr.h\n    wx/univ/anybutton.h\n    wx/univ/app.h\n    wx/univ/bmpbuttn.h\n    wx/univ/button.h\n    wx/univ/checkbox.h\n    wx/univ/checklst.h\n    wx/univ/chkconf.h\n    wx/univ/choice.h\n    wx/univ/colschem.h\n    wx/univ/combobox.h\n    wx/univ/control.h\n    wx/univ/custombgwin.h\n    wx/univ/dialog.h\n    wx/univ/frame.h\n    wx/univ/gauge.h\n    wx/univ/inpcons.h\n    wx/univ/inphand.h\n    wx/univ/listbox.h\n    wx/univ/menu.h\n    wx/univ/menuitem.h\n    wx/univ/notebook.h\n    wx/univ/panel.h\n    wx/univ/radiobox.h\n    wx/univ/radiobut.h\n    wx/univ/renderer.h\n    wx/univ/scrarrow.h\n    wx/univ/scrolbar.h\n    wx/univ/scrthumb.h\n    wx/univ/scrtimer.h\n    wx/univ/slider.h\n    wx/univ/spinbutt.h\n    wx/univ/statbmp.h\n    wx/univ/statbox.h\n    wx/univ/statline.h\n    wx/univ/stattext.h\n    wx/univ/statusbr.h\n    wx/univ/stdrend.h\n    wx/univ/textctrl.h\n    wx/univ/theme.h\n    wx/univ/tglbtn.h\n    wx/univ/toolbar.h\n    wx/univ/toplevel.h\n    wx/univ/window.h\n    wx/generic/activityindicator.h"
+       },
+       {
+          "@var": "MEDIA_CMN_SRC",
+          "@hints": "files",
+          "#text": "src/common/mediactrlcmn.cpp"
+       },
+       {
+          "@var": "MEDIA_CMN_HDR",
+          "@hints": "files",
+          "#text": "wx/mediactrl.h"
+       },
+       {
+          "@var": "MEDIA_MSW_SRC",
+          "@hints": "files",
+          "#text": "src/msw/mediactrl_am.cpp\n    src/msw/mediactrl_wmp10.cpp\n    src/msw/mediactrl_qt.cpp"
+       },
+       {
+          "@var": "MEDIA_MSW_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_MSW_DESKTOP_SRC",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_MSW_DESKTOP_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_OSX_COCOA_SRC",
+          "@hints": "files",
+          "#text": "src/osx/cocoa/mediactrl.mm"
+       },
+       {
+          "@var": "MEDIA_OSX_COCOA_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_OSX_IPHONE_SRC",
+          "@hints": "files",
+          "#text": "src/osx/cocoa/mediactrl.mm"
+       },
+       {
+          "@var": "MEDIA_OSX_IPHONE_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_COCOA_SRC",
+          "@hints": "files",
+          "#text": "src/cocoa/mediactrl.mm"
+       },
+       {
+          "@var": "MEDIA_COCOA_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_UNIX_SRC",
+          "@hints": "files",
+          "#text": "src/unix/mediactrl.cpp\n    src/unix/mediactrl_gstplayer.cpp"
+       },
+       {
+          "@var": "MEDIA_UNIX_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_GTK_SRC",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_GTK1_SRC",
+          "@hints": "files"
+       },
+       {
+          "@var": "HTML_SRC_PLATFORM",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "src/msw/helpbest.cpp\n        src/html/chm.cpp"
+             },
+             {
+                "@cond": "PLATFORM_UNIX=='1'",
+                "#text": "src/html/chm.cpp"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "src/html/chm.cpp"
+             }
+          ]
+       },
+       {
+          "@var": "HTML_CMN_SRC",
+          "@hints": "files",
+          "#text": [
+             "src/html/helpctrl.cpp\n    src/html/helpdata.cpp\n    src/html/helpdlg.cpp\n    src/html/helpfrm.cpp\n    src/html/helpwnd.cpp\n    src/html/htmlcell.cpp\n    src/html/htmlfilt.cpp\n    src/html/htmlpars.cpp\n    src/html/htmltag.cpp\n    src/html/htmlwin.cpp\n    src/html/htmprint.cpp\n    src/html/m_dflist.cpp\n    src/html/m_fonts.cpp\n    src/html/m_hline.cpp\n    src/html/m_image.cpp\n    src/html/m_layout.cpp\n    src/html/m_links.cpp\n    src/html/m_list.cpp\n    src/html/m_pre.cpp\n    src/html/m_span.cpp\n    src/html/m_style.cpp\n    src/html/m_tables.cpp\n    src/html/styleparams.cpp\n    src/html/winpars.cpp",
+             "src/generic/htmllbox.cpp"
+          ]
+       },
+       {
+          "@var": "HTML_SRC",
+          "@hints": "files",
+          "#text": "$(HTML_SRC_PLATFORM)\n    $(HTML_CMN_SRC)"
+       },
+       {
+          "@var": "MSW_HTML_HDR",
+          "@hints": "files",
+          "if": {
+             "@cond": "TOOLKIT=='MSW'",
+             "#text": "wx/msw/helpbest.h"
+          }
+       },
+       {
+          "@var": "HTML_CMN_HDR",
+          "@hints": "files",
+          "#text": [
+             "wx/html/helpctrl.h\n    wx/html/helpdata.h\n    wx/html/helpdlg.h\n    wx/html/helpfrm.h\n    wx/html/helpwnd.h\n    wx/html/htmlcell.h\n    wx/html/htmldefs.h\n    wx/html/htmlfilt.h\n    wx/html/htmlpars.h\n    wx/html/htmlproc.h\n    wx/html/htmltag.h\n    wx/html/htmlwin.h\n    wx/html/htmprint.h\n    wx/html/m_templ.h\n    wx/html/styleparams.h\n    wx/html/winpars.h\n    wx/wxhtml.h",
+             "wx/htmllbox.h\n    wx/html/forcelnk.h"
+          ]
+       },
+       {
+          "@var": "HTML_HDR",
+          "@hints": "files",
+          "#text": "$(HTML_CMN_HDR)\n    $(MSW_HTML_HDR)"
+       },
+       {
+          "@var": "WEBVIEW_SRC_PLATFORM",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "src/msw/webview_ie.cpp\n        src/msw/webview_edge.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK'",
+                "#text": "src/gtk/webview_webkit.cpp\n        src/gtk/webview_webkit2.cpp"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "src/osx/webview_webkit.mm"
+             }
+          ]
+       },
+       {
+          "@var": "WEBVIEW_CMN_SRC",
+          "@hints": "files",
+          "#text": "src/common/webview.cpp\n    src/common/webviewarchivehandler.cpp\n    src/common/webviewfshandler.cpp"
+       },
+       {
+          "@var": "WEBVIEW_SRC",
+          "@hints": "files",
+          "#text": "$(WEBVIEW_SRC_PLATFORM)\n    $(WEBVIEW_CMN_SRC)"
+       },
+       {
+          "@var": "WEBVIEW_HDR_PLATFORM",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "wx/msw/webviewhistoryitem_ie.h\n        wx/msw/webview_ie.h\n        wx/msw/webview_edge.h"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK'",
+                "#text": "wx/gtk/webviewhistoryitem_webkit.h\n        wx/gtk/webview_webkit.h"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "wx/osx/webviewhistoryitem_webkit.h\n        wx/osx/webview_webkit.h"
+             }
+          ]
+       },
+       {
+          "@var": "WEBVIEW_CMN_HDR",
+          "@hints": "files",
+          "#text": "wx/webview.h\n    wx/webviewarchivehandler.h\n    wx/webviewfshandler.h"
+       },
+       {
+          "@var": "WEBVIEW_HDR",
+          "@hints": "files",
+          "#text": "$(WEBVIEW_HDR_PLATFORM)\n    $(WEBVIEW_CMN_HDR)"
+       },
+       {
+          "@var": "WEBVIEW_WEBKIT2_EXTENSION_SRC",
+          "@hints": "files",
+          "#text": "src/gtk/webview_webkit2_extension.cpp"
+       },
+       {
+          "@var": "XRC_SRC",
+          "@hints": "files",
+          "#text": "src/xrc/xh_activityindicator.cpp\n    src/xrc/xh_animatctrl.cpp\n    src/xrc/xh_bannerwindow.cpp\n    src/xrc/xh_bmp.cpp\n    src/xrc/xh_bmpcbox.cpp\n    src/xrc/xh_bmpbt.cpp\n    src/xrc/xh_bttn.cpp\n    src/xrc/xh_cald.cpp\n    src/xrc/xh_chckb.cpp\n    src/xrc/xh_chckl.cpp\n    src/xrc/xh_choic.cpp\n    src/xrc/xh_choicbk.cpp\n    src/xrc/xh_clrpicker.cpp\n    src/xrc/xh_cmdlinkbn.cpp\n    src/xrc/xh_collpane.cpp\n    src/xrc/xh_combo.cpp\n    src/xrc/xh_comboctrl.cpp\n    src/xrc/xh_dataview.cpp\n    src/xrc/xh_datectrl.cpp\n    src/xrc/xh_dirpicker.cpp\n    src/xrc/xh_dlg.cpp\n    src/xrc/xh_editlbox.cpp\n    src/xrc/xh_filectrl.cpp\n    src/xrc/xh_filepicker.cpp\n    src/xrc/xh_fontpicker.cpp\n    src/xrc/xh_frame.cpp\n    src/xrc/xh_gauge.cpp\n    src/xrc/xh_gdctl.cpp\n    src/xrc/xh_grid.cpp\n    src/xrc/xh_html.cpp\n    src/xrc/xh_hyperlink.cpp\n    src/xrc/xh_infobar.cpp\n    src/xrc/xh_listb.cpp\n    src/xrc/xh_listbk.cpp\n    src/xrc/xh_listc.cpp\n    src/xrc/xh_mdi.cpp\n    src/xrc/xh_menu.cpp\n    src/xrc/xh_notbk.cpp\n    src/xrc/xh_odcombo.cpp\n    src/xrc/xh_panel.cpp\n    src/xrc/xh_propdlg.cpp\n    src/xrc/xh_radbt.cpp\n    src/xrc/xh_radbx.cpp\n    src/xrc/xh_scrol.cpp\n    src/xrc/xh_scwin.cpp\n    src/xrc/xh_htmllbox.cpp\n    src/xrc/xh_simplebook.cpp\n    src/xrc/xh_sizer.cpp\n    src/xrc/xh_slidr.cpp\n    src/xrc/xh_spin.cpp\n    src/xrc/xh_split.cpp\n    src/xrc/xh_srchctrl.cpp\n    src/xrc/xh_statbar.cpp\n    src/xrc/xh_stbmp.cpp\n    src/xrc/xh_stbox.cpp\n    src/xrc/xh_stlin.cpp\n    src/xrc/xh_sttxt.cpp\n    src/xrc/xh_text.cpp\n    src/xrc/xh_tglbtn.cpp\n    src/xrc/xh_timectrl.cpp\n    src/xrc/xh_toolb.cpp\n    src/xrc/xh_toolbk.cpp\n    src/xrc/xh_tree.cpp\n    src/xrc/xh_treebk.cpp\n    src/xrc/xh_unkwn.cpp\n    src/xrc/xh_wizrd.cpp\n    src/xrc/xmlres.cpp\n    src/xrc/xmlrsall.cpp"
+       },
+       {
+          "@var": "XRC_HDR",
+          "@hints": "files",
+          "#text": "wx/xrc/xh_activityindicator.h\n    wx/xrc/xh_all.h\n    wx/xrc/xh_animatctrl.h\n    wx/xrc/xh_bannerwindow.h\n    wx/xrc/xh_bmpbt.h\n    wx/xrc/xh_bmp.h\n    wx/xrc/xh_bmpcbox.h\n    wx/xrc/xh_bttn.h\n    wx/xrc/xh_cald.h\n    wx/xrc/xh_chckb.h\n    wx/xrc/xh_chckl.h\n    wx/xrc/xh_choic.h\n    wx/xrc/xh_choicbk.h\n    wx/xrc/xh_clrpicker.h\n    wx/xrc/xh_cmdlinkbn.h\n    wx/xrc/xh_collpane.h\n    wx/xrc/xh_combo.h\n    wx/xrc/xh_comboctrl.h\n    wx/xrc/xh_dataview.h\n    wx/xrc/xh_datectrl.h\n    wx/xrc/xh_dirpicker.h\n    wx/xrc/xh_dlg.h\n    wx/xrc/xh_editlbox.h\n    wx/xrc/xh_filectrl.h\n    wx/xrc/xh_filepicker.h\n    wx/xrc/xh_fontpicker.h\n    wx/xrc/xh_frame.h\n    wx/xrc/xh_mdi.h\n    wx/xrc/xh_gauge.h\n    wx/xrc/xh_gdctl.h\n    wx/xrc/xh_grid.h\n    wx/xrc/xh_html.h\n    wx/xrc/xh_hyperlink.h\n    wx/xrc/xh_infobar.h\n    wx/xrc/xh_listb.h\n    wx/xrc/xh_listbk.h\n    wx/xrc/xh_listc.h\n    wx/xrc/xh_menu.h\n    wx/xrc/xh_notbk.h\n    wx/xrc/xh_odcombo.h\n    wx/xrc/xh_panel.h\n    wx/xrc/xh_propdlg.h\n    wx/xrc/xh_radbt.h\n    wx/xrc/xh_radbx.h\n    wx/xrc/xh_scrol.h\n    wx/xrc/xh_scwin.h\n    wx/xrc/xh_htmllbox.h\n    wx/xrc/xh_simplebook.h\n    wx/xrc/xh_sizer.h\n    wx/xrc/xh_slidr.h\n    wx/xrc/xh_spin.h\n    wx/xrc/xh_split.h\n    wx/xrc/xh_srchctrl.h\n    wx/xrc/xh_statbar.h\n    wx/xrc/xh_stbmp.h\n    wx/xrc/xh_stbox.h\n    wx/xrc/xh_stlin.h\n    wx/xrc/xh_sttxt.h\n    wx/xrc/xh_text.h\n    wx/xrc/xh_tglbtn.h\n    wx/xrc/xh_timectrl.h\n    wx/xrc/xh_toolb.h\n    wx/xrc/xh_toolbk.h\n    wx/xrc/xh_tree.h\n    wx/xrc/xh_treebk.h\n    wx/xrc/xh_unkwn.h\n    wx/xrc/xh_wizrd.h\n    wx/xrc/xmlres.h"
+       },
+       {
+          "@var": "XML_SRC",
+          "@hints": "files",
+          "#text": "src/xml/xml.cpp\n    src/common/xtixml.cpp"
+       },
+       {
+          "@var": "XML_HDR",
+          "@hints": "files",
+          "#text": "wx/xml/xml.h\n    wx/xtixml.h"
+       },
+       {
+          "@var": "OPENGL_SRC_PLATFORM",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "src/osx/cocoa/glcanvas.mm src/osx/glcanvas_osx.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_IPHONE'",
+                "#text": "src/osx/iphone/glcanvas.mm src/osx/glcanvas_osx.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='COCOA'",
+                "#text": "src/cocoa/glcanvas.mm"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='4' and PLATFORM_WIN32=='0'",
+                "#text": "src/unix/glegl.cpp\n        src/unix/glx11.cpp\n        src/gtk/glcanvas.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='3' and PLATFORM_WIN32=='0'",
+                "#text": "src/unix/glegl.cpp\n        src/unix/glx11.cpp\n        src/gtk/glcanvas.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='2'",
+                "#text": "src/gtk/glcanvas.cpp\n        src/unix/glx11.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION==''",
+                "#text": "src/gtk1/glcanvas.cpp\n        src/unix/glx11.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='QT'",
+                "#text": "src/qt/glcanvas.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "src/msw/glcanvas.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "src/x11/glcanvas.cpp src/unix/glx11.cpp"
+             },
+             {
+                "@cond": "TOOLKIT=='X11'",
+                "#text": "src/x11/glcanvas.cpp src/unix/glx11.cpp"
+             }
+          ]
+       },
+       {
+          "@var": "OPENGL_SRC",
+          "@hints": "files",
+          "#text": "src/common/glcmn.cpp\n    $(OPENGL_SRC_PLATFORM)"
+       },
+       {
+          "@var": "OPENGL_HDR_PLATFORM",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "wx/osx/glcanvas.h"
+             },
+             {
+                "@cond": "TOOLKIT=='COCOA'",
+                "#text": "wx/cocoa/glcanvas.h"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='4'",
+                "#text": "wx/gtk/glcanvas.h\n        wx/unix/glegl.h\n        wx/unix/glx11.h"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='3'",
+                "#text": "wx/gtk/glcanvas.h\n        wx/unix/glegl.h\n        wx/unix/glx11.h"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='2'",
+                "#text": "wx/gtk/glcanvas.h\n        wx/unix/glx11.h"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION==''",
+                "#text": "wx/gtk1/glcanvas.h\n        wx/unix/glx11.h"
+             },
+             {
+                "@cond": "TOOLKIT=='QT'",
+                "#text": "wx/qt/glcanvas.h"
+             },
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "wx/msw/glcanvas.h"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "wx/x11/glcanvas.h wx/unix/glx11.h"
+             },
+             {
+                "@cond": "TOOLKIT=='X11'",
+                "#text": "wx/x11/glcanvas.h wx/unix/glx11.h"
+             }
+          ]
+       },
+       {
+          "@var": "OPENGL_HDR",
+          "@hints": "files",
+          "#text": "wx/glcanvas.h\n    $(OPENGL_HDR_PLATFORM)"
+       },
+       {
+          "@var": "UNIX_SOUND_SDL_SRC",
+          "@hints": "files",
+          "#text": "src/unix/sound_sdl.cpp"
+       },
+       {
+          "@var": "AUI_GTK_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='2'",
+             "#text": "src/aui/tabartgtk.cpp"
+          }
+       },
+       {
+          "@var": "AUI_GTK_HDR",
+          "@hints": "files",
+          "if": {
+             "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='2'",
+             "#text": "wx/aui/tabartgtk.h"
+          }
+       },
+       {
+          "@var": "AUI_MSW_SRC",
+          "@hints": "files",
+          "#text": "src/aui/tabartmsw.cpp\n    src/aui/barartmsw.cpp"
+       },
+       {
+          "@var": "AUI_MSW_HDR",
+          "@hints": "files",
+          "#text": "wx/aui/tabartmsw.h\n    wx/aui/barartmsw.h"
+       },
+       {
+          "@var": "AUI_PLATFORM_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "TOOLKIT=='MSW'",
+             "#text": "$(AUI_MSW_SRC)"
+          }
+       },
+       {
+          "@var": "AUI_PLATFORM_HDR",
+          "@hints": "files",
+          "if": {
+             "@cond": "TOOLKIT=='MSW'",
+             "#text": "$(AUI_MSW_HDR)"
+          }
+       },
+       {
+          "@var": "AUI_CMN_SRC",
+          "@hints": "files",
+          "#text": "src/aui/framemanager.cpp\n    src/aui/dockart.cpp\n    src/aui/floatpane.cpp\n    src/aui/auibook.cpp\n    src/aui/auibar.cpp\n    src/aui/tabmdi.cpp\n    src/aui/tabart.cpp\n    src/xrc/xh_aui.cpp\n    src/xrc/xh_auitoolb.cpp"
+       },
+       {
+          "@var": "AUI_SRC",
+          "@hints": "files",
+          "#text": "$(AUI_CMN_SRC)\n    $(AUI_GTK_SRC)\n    $(AUI_PLATFORM_SRC)"
+       },
+       {
+          "@var": "AUI_CMN_HDR",
+          "@hints": "files",
+          "#text": "wx/aui/framemanager.h\n    wx/aui/dockart.h\n    wx/aui/floatpane.h\n    wx/aui/auibook.h\n    wx/aui/auibar.h\n    wx/aui/tabmdi.h\n    wx/aui/aui.h\n    wx/aui/tabart.h\n    wx/xrc/xh_aui.h\n    wx/xrc/xh_auitoolb.h"
+       },
+       {
+          "@var": "AUI_HDR",
+          "@hints": "files",
+          "#text": "$(AUI_CMN_HDR)\n    $(AUI_GTK_HDR)\n    $(AUI_PLATFORM_HDR)"
+       },
+       {
+          "@var": "RIBBON_SRC",
+          "@hints": "files",
+          "#text": "src/ribbon/art_internal.cpp\n    src/ribbon/art_msw.cpp\n    src/ribbon/art_aui.cpp\n    src/ribbon/bar.cpp\n    src/ribbon/buttonbar.cpp\n    src/ribbon/control.cpp\n    src/ribbon/gallery.cpp\n    src/ribbon/page.cpp\n    src/ribbon/panel.cpp\n    src/ribbon/toolbar.cpp\n    src/xrc/xh_ribbon.cpp"
+       },
+       {
+          "@var": "RIBBON_HDR",
+          "@hints": "files",
+          "#text": "wx/ribbon/art.h\n    wx/ribbon/art_internal.h\n    wx/ribbon/bar.h\n    wx/ribbon/buttonbar.h\n    wx/ribbon/control.h\n    wx/ribbon/gallery.h\n    wx/ribbon/page.h\n    wx/ribbon/panel.h\n    wx/ribbon/toolbar.h\n    wx/xrc/xh_ribbon.h"
+       },
+       {
+          "@var": "PROPGRID_SRC",
+          "@hints": "files",
+          "#text": "src/propgrid/advprops.cpp\n    src/propgrid/editors.cpp\n    src/propgrid/manager.cpp\n    src/propgrid/property.cpp\n    src/propgrid/propgrid.cpp\n    src/propgrid/propgridiface.cpp\n    src/propgrid/propgridpagestate.cpp\n    src/propgrid/props.cpp"
+       },
+       {
+          "@var": "PROPGRID_HDR",
+          "@hints": "files",
+          "#text": "wx/propgrid/advprops.h\n    wx/propgrid/editors.h\n    wx/propgrid/manager.h\n    wx/propgrid/property.h\n    wx/propgrid/propgrid.h\n    wx/propgrid/propgriddefs.h\n    wx/propgrid/propgridiface.h\n    wx/propgrid/propgridpagestate.h\n    wx/propgrid/props.h"
+       },
+       {
+          "@var": "RICHTEXT_SRC",
+          "@hints": "files",
+          "#text": "src/richtext/richtextbuffer.cpp\n    src/richtext/richtextctrl.cpp\n    src/richtext/richtextformatdlg.cpp\n    src/richtext/richtexthtml.cpp\n    src/richtext/richtextimagedlg.cpp\n    src/richtext/richtextprint.cpp\n    src/richtext/richtextstyledlg.cpp\n    src/richtext/richtextstyles.cpp\n    src/richtext/richtextsymboldlg.cpp\n    src/richtext/richtextxml.cpp\n    src/xrc/xh_richtext.cpp"
+       },
+       {
+          "@var": "RICHTEXT_HDR",
+          "@hints": "files",
+          "#text": "wx/richtext/richtextbackgroundpage.h\n    wx/richtext/richtextborderspage.h\n    wx/richtext/richtextbuffer.h\n    wx/richtext/richtextbulletspage.h\n    wx/richtext/richtextctrl.h\n    wx/richtext/richtextdialogpage.h\n    wx/richtext/richtextfontpage.h\n    wx/richtext/richtextformatdlg.h\n    wx/richtext/richtexthtml.h\n    wx/richtext/richtextimagedlg.h\n    wx/richtext/richtextindentspage.h\n    wx/richtext/richtextliststylepage.h\n    wx/richtext/richtextmarginspage.h\n    wx/richtext/richtextprint.h\n    wx/richtext/richtextsizepage.h\n    wx/richtext/richtextstyledlg.h\n    wx/richtext/richtextstylepage.h\n    wx/richtext/richtextstyles.h\n    wx/richtext/richtextsymboldlg.h\n    wx/richtext/richtexttabspage.h\n    wx/richtext/richtextuicustomization.h\n    wx/richtext/richtextxml.h\n    wx/xrc/xh_richtext.h"
+       },
+       {
+          "@var": "STC_CMN_SRC",
+          "@hints": "files",
+          "#text": "src/stc/stc.cpp\n    src/stc/PlatWX.cpp\n    src/stc/ScintillaWX.cpp"
+       },
+       {
+          "@var": "STC_CMN_HDR",
+          "@hints": "files",
+          "#text": "wx/stc/stc.h"
+       },
+       {
+          "@var": "STC_OSX_COCOA_SRC",
+          "@hints": "files",
+          "#text": "src/stc/PlatWXcocoa.mm"
+       },
+       {
+          "@var": "STC_OSX_COCOA_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "BASE_OSX_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "$(BASE_OSX_SHARED_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_IPHONE'",
+                "#text": "$(BASE_OSX_SHARED_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='COCOA'",
+                "#text": "$(BASE_OSX_NOTWXMAC_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK'",
+                "#text": "$(BASE_OSX_NOTWXMAC_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='X11'",
+                "#text": "$(BASE_OSX_NOTWXMAC_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "$(BASE_OSX_NOTWXMAC_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT==''",
+                "#text": "$(BASE_OSX_NOTWXMAC_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "BASE_PLATFORM_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "PLATFORM_UNIX=='1'",
+                "#text": "$(BASE_UNIX_SRC)"
+             },
+             {
+                "@cond": "PLATFORM_WIN32=='1'",
+                "#text": "$(BASE_WIN32_SRC)"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "$(BASE_OSX_SHARED_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "BASE_AND_GUI_TOOLKIT_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "TOOLKIT=='OSX_COCOA'",
+             "#text": "$(BASE_AND_GUI_OSX_COCOA_SRC)"
+          }
+       },
+       {
+          "@var": "BASE_AND_GUI_PLATFORM_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "PLATFORM_WIN32=='1'",
+             "#text": "$(BASE_AND_GUI_WIN32_SRC)"
+          }
+       },
+       {
+          "@var": "BASE_OSX_HDR",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "$(BASE_OSX_SHARED_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='COCOA'",
+                "#text": "$(BASE_OSX_NOTWXMAC_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK'",
+                "#text": "$(BASE_OSX_NOTWXMAC_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='X11'",
+                "#text": "$(BASE_OSX_NOTWXMAC_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "$(BASE_OSX_NOTWXMAC_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT==''",
+                "#text": "$(BASE_OSX_NOTWXMAC_HDR)"
+             }
+          ]
+       },
+       {
+          "@var": "BASE_PLATFORM_HDR",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "PLATFORM_UNIX=='1'",
+                "#text": "$(BASE_UNIX_HDR)"
+             },
+             {
+                "@cond": "PLATFORM_WIN32=='1'",
+                "#text": "$(BASE_WIN32_HDR)"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "$(BASE_OSX_HDR)"
+             }
+          ]
+       },
+       {
+          "@var": "BASE_SRC",
+          "@hints": "files",
+          "#text": "$(BASE_CMN_SRC) $(BASE_PLATFORM_SRC)"
+       },
+       {
+          "@var": "BASE_AND_GUI_SRC",
+          "@hints": "files",
+          "#text": "$(BASE_AND_GUI_CMN_SRC)\n        $(BASE_AND_GUI_PLATFORM_SRC) $(BASE_AND_GUI_TOOLKIT_SRC)"
+       },
+       {
+          "@var": "NET_PLATFORM_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "PLATFORM_UNIX=='1'",
+                "#text": "$(NET_UNIX_SRC)"
+             },
+             {
+                "@cond": "PLATFORM_WIN32=='1'",
+                "#text": "$(NET_WIN32_SRC)"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "$(NET_UNIX_SRC) $(NET_OSX_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "NET_PLATFORM_HDR",
+          "@hints": "files",
+          "if": {
+             "@cond": "PLATFORM_WIN32=='1'",
+             "#text": "$(NET_WIN32_HDR)"
+          }
+       },
+       {
+          "@var": "NET_SRC",
+          "@hints": "files",
+          "#text": "$(NET_CMN_SRC) $(NET_PLATFORM_SRC)"
+       },
+       {
+          "@var": "LOWLEVEL_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='4'",
+                "#text": "$(GTK_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='3'",
+                "#text": "$(GTK_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='2'",
+                "#text": "$(GTK2_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION==''",
+                "#text": "$(GTK1_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "$(MOTIF_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "$(MSW_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "$(OSX_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_IPHONE'",
+                "#text": "$(OSX_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='X11'",
+                "#text": "$(X11_LOWLEVEL_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='DFB'",
+                "#text": "$(DFB_LOWLEVEL_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "LOWLEVEL_HDR",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='4'",
+                "#text": "$(GTK_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='3'",
+                "#text": "$(GTK_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='2'",
+                "#text": "$(GTK_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION==''",
+                "#text": "$(GTK1_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "$(MOTIF_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "$(MSW_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "$(OSX_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_IPHONE'",
+                "#text": "$(OSX_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='X11'",
+                "#text": "$(X11_LOWLEVEL_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='DFB'",
+                "#text": "$(DFB_LOWLEVEL_HDR)"
+             }
+          ]
+       },
+       {
+          "@var": "PLATFORM_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "PLATFORM_UNIX=='1'",
+                "#text": "$(UNIX_SRC)"
+             },
+             {
+                "@cond": "PLATFORM_MACOSX=='1'",
+                "#text": "$(UNIX_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "GUI_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='4'",
+                "#text": "$(GTK_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='3'",
+                "#text": "$(GTK_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='2'",
+                "#text": "$(GTK2_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION==''",
+                "#text": "$(GTK1_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "$(MOTIF_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "$(MSW_SRC) $(MSW_DESKTOP_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "$(OSX_COCOA_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_IPHONE'",
+                "#text": "$(OSX_IPHONE_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='QT'",
+                "#text": "$(QT_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "GUI_HDR",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='4'",
+                "#text": "$(GTK_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='3'",
+                "#text": "$(GTK_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION=='2'",
+                "#text": "$(GTK2_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK' and TOOLKIT_VERSION==''",
+                "#text": "$(GTK1_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "$(MOTIF_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "$(MSW_HDR) $(MSW_DESKTOP_HDR) $(MSW_RSC)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "$(OSX_SHARED_HDR) $(OSX_COCOA_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_IPHONE'",
+                "#text": "$(OSX_SHARED_HDR) $(OSX_IPHONE_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='QT'",
+                "#text": "$(QT_HDR)"
+             }
+          ]
+       },
+       {
+          "@var": "CORE_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "USE_GUI=='1' and WXUNIV=='0'",
+                "#text": "$(LOWLEVEL_SRC) $(PLATFORM_SRC) $(GUI_SRC) $(GUI_CMN_SRC)"
+             },
+             {
+                "@cond": "USE_GUI=='1' and WXUNIV=='1'",
+                "#text": "$(LOWLEVEL_SRC) $(PLATFORM_SRC) $(UNIV_SRC) $(UNIV_THEMES_SRC) $(GUI_CMN_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "ADVANCED_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "FORMAT=='autoconf'",
+             "#text": "src/common/dummy.cpp"
+          }
+       },
+       {
+          "@var": "ADVANCED_HDR",
+          "@hints": "files"
+       },
+       {
+          "@var": "MEDIA_PLATFORM_SRC",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "$(MEDIA_MSW_SRC) $(MEDIA_MSW_DESKTOP_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "$(MEDIA_OSX_COCOA_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_IPHONE'",
+                "#text": "$(MEDIA_OSX_IPHONE_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='COCOA'",
+                "#text": "$(MEDIA_COCOA_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "$(MEDIA_UNIX_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK'",
+                "#text": "$(MEDIA_UNIX_SRC) $(MEDIA_GTK_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='X11'",
+                "#text": "$(MEDIA_UNIX_SRC)"
+             },
+             {
+                "@cond": "TOOLKIT=='QT'",
+                "#text": "$(MEDIA_QT_SRC)"
+             }
+          ]
+       },
+       {
+          "@var": "MEDIA_PLATFORM_HDR",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "TOOLKIT=='MSW'",
+                "#text": "$(MEDIA_MSW_HDR) $(MEDIA_MSW_DESKTOP_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_COCOA'",
+                "#text": "$(MEDIA_OSX_COCOA_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='OSX_IPHONE'",
+                "#text": "$(MEDIA_OSX_IPHONE_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='COCOA'",
+                "#text": "$(MEDIA_COCOA_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='MOTIF'",
+                "#text": "$(MEDIA_UNIX_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='GTK'",
+                "#text": "$(MEDIA_UNIX_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='X11'",
+                "#text": "$(MEDIA_UNIX_HDR)"
+             },
+             {
+                "@cond": "TOOLKIT=='QT'",
+                "#text": "$(MEDIA_QT_HDR)"
+             }
+          ]
+       },
+       {
+          "@var": "MEDIA_SRC",
+          "#text": "$(MEDIA_CMN_SRC) $(MEDIA_PLATFORM_SRC)"
+       },
+       {
+          "@var": "MEDIA_HDR",
+          "#text": "$(MEDIA_CMN_HDR) $(MEDIA_PLATFORM_HDR)"
+       },
+       {
+          "@var": "STC_PLATFORM_SRC",
+          "@hints": "files",
+          "if": {
+             "@cond": "TOOLKIT=='OSX_COCOA'",
+             "#text": "$(STC_OSX_COCOA_SRC)"
+          }
+       },
+       {
+          "@var": "STC_PLATFORM_HDR",
+          "@hints": "files",
+          "if": {
+             "@cond": "TOOLKIT=='OSX_COCOA'",
+             "#text": "$(STC_OSX_COCOA_HDR)"
+          }
+       },
+       {
+          "@var": "STC_SRC",
+          "#text": "$(STC_CMN_SRC) $(STC_PLATFORM_SRC)"
+       },
+       {
+          "@var": "STC_HDR",
+          "#text": "$(STC_CMN_HDR) $(STC_PLATFORM_HDR)"
+       },
+       {
+          "@var": "GUI_CORE_HEADERS",
+          "@hints": "files",
+          "if": [
+             {
+                "@cond": "USE_GUI=='1' and WXUNIV=='0'",
+                "#text": "$(GUI_HDR)"
+             },
+             {
+                "@cond": "USE_GUI=='1' and WXUNIV=='1'",
+                "#text": "$(UNIV_HDR)"
+             }
+          ]
+       },
+       {
+          "@var": "ALL_GUI_HEADERS",
+          "@hints": "files",
+          "if": {
+             "@cond": "USE_GUI=='1'",
+             "#text": "$(GUI_CMN_HDR)\n            $(LOWLEVEL_HDR)\n            $(GUI_CORE_HEADERS)\n            $(MEDIA_HDR) $(HTML_HDR)\n            $(OPENGL_HDR) $(QA_HDR) $(XRC_HDR) $(AUI_HDR) $(PROPGRID_HDR)\n            $(RIBBON_HDR) $(RICHTEXT_HDR) $(STC_HDR) $(WEBVIEW_HDR)"
+          }
+       },
+       {
+          "@var": "ALL_BASE_HEADERS",
+          "@make_var": "1",
+          "@hints": "files",
+          "#text": "$(BASE_CMN_HDR) $(BASE_PLATFORM_HDR)\n        $(NET_CMN_HDR)\n        $(XML_HDR)"
+       },
+       {
+          "@var": "ALL_HEADERS",
+          "@make_var": "1",
+          "@hints": "files",
+          "#text": "$(ALL_BASE_HEADERS) $(ALL_GUI_HEADERS)"
+       },
+       {
+          "@var": "ALL_PORTS_BASE_HEADERS",
+          "@make_var": "1",
+          "@hints": "files",
+          "#text": "$(BASE_CMN_HDR)\n        $(BASE_UNIX_HDR)\n        $(BASE_WIN32_HDR)\n        $(BASE_OSX_HDR)\n        $(NET_CMN_HDR)\n        $(XML_HDR)"
+       },
+       {
+          "@var": "ALL_BASE_SOURCES",
+          "@make_var": "1",
+          "@hints": "files",
+          "#text": "$(BASE_CMN_SRC)\n        $(BASE_UNIX_SRC) $(BASE_WIN32_SRC)\n        $(BASE_OSX_SRC)\n        $(BASE_AND_GUI_CMN_SRC)\n        $(BASE_AND_GUI_OSX_COCOA_SRC)\n        $(BASE_AND_GUI_WIN32_SRC)\n        $(NET_CMN_SRC) $(NET_UNIX_SRC) $(NET_OSX_SRC)\n        $(NET_WIN32_SRC)\n        $(XML_SRC)"
+       },
+       {
+          "@var": "PLUGIN_SRC",
+          "if": {
+             "@cond": "FORMAT=='autoconf' and PLATFORM_UNIX=='1' and USE_PLUGINS=='0'",
+             "#text": "$(UNIX_SOUND_SDL_SRC)"
+          }
+       },
+       {
+          "@var": "PLUGIN_MONOLIB_SRC",
+          "#text": "$(PLUGIN_SRC)"
+       }
+    ]
+ }
+ 
+ 
