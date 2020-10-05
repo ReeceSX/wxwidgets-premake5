@@ -4,9 +4,10 @@ local setup      = require("boilerplateProject")
 local configPath = "../wxConfig/"
 
 local gl         = true
-local path       = "wxWidgets/"
-local gtk_linux  = true  
-local windows    = false
+local net        = true
+local path       = "./wxWidgets/"
+local gtk_linux  = _G.linux  
+local windows    = _G.win32
 
 local platform_macro = "__WXUNKNOWNPLATFORM_"
 local wxvars         = {}
@@ -23,7 +24,6 @@ function addSources(name)
 	local sourceFiles = wxvars[name]
 	if (sourceFiles ~= nil) then
 		for i,v in ipairs(sourceFiles) do 
-			print(path, v)
 			files(path .. v)
 		end
 	end
@@ -38,8 +38,9 @@ function includeBaseGtk()
 	includedirs "/usr/include/pango-1.0/"
 	includedirs "/usr/include/cairo"
 	includedirs "/usr/lib/glib-2.0/include"
-	includedirs "/usr/include/harfbuzz"
-	includedirs "/usr/include/freetype2"
+
+	incDep "AuroraFreetype" 
+	incDep "AuroraHarfbuzz"
 end
 _G.includeBaseGtk = includeBaseGtk 
 
@@ -47,7 +48,7 @@ _G.wxGlobals = {"__WX__", "wxUSE_GUI=1", "wxUSE_BASE=1", platform_macro,"_FILE_O
 
 -- aurorawxregex
 setup("AuroraWxRegex", "StaticLib", nil, path .. "include")
-defines "platform_macro"
+defines(platform_macro)
 local regexFiles = 
 {
 	path .. "src/regex/regcomp.c", 
@@ -70,14 +71,14 @@ includedirs(path .. "src/stc/scintilla/lexers/")
 
 addSources("STC_SRC")
 
+
 if (gtk_linux) then
-	includeBaseGtk()
-
-	links "harfbuzz"
-	links "freetype"
-
 	includedirs "/usr/include/libmount"
 	includedirs "/usr/include/atk-1.0"
+	
+	includeBaseGtk()
+else
+	
 end
 
 includedirs("gdk/include")
@@ -90,17 +91,14 @@ defines "WXBUILDING"
 
 links  "AuroraWxRegex"
 incDep "AuroraScintilla" 
+incDep "AuroraZLib" 
+incDep "AuroraPng"  
 
 includedirs(path .. "src/common/")
 includedirs(path .. "src/regex/")
 includedirs(path .. "src/stc/scintilla/include/")
 
 includedirs(path .. configPath)
-
-links "zlib"
-links "png"
-links "harfbuzz"
-links "freetype"
 
 if (gtk_linux) then
 	-- CPP abis are violate and heavily implementation defined
@@ -119,16 +117,20 @@ if (gtk_linux) then
 	includedirs "/usr/include/atk-1.0"
 	includedirs "/usr/include/at-spi2-atk/2.0"
 else
-	-- TODO: ??
 end
 
-addSources("XML_SRC")
+--addSources("XML_SRC") -- No build scripts for LibXPat on Windows for now
+
 addSources("CORE_SRC")
 addSources("BASE_SRC")
 addSources("BASE_AND_GUI_SRC")
 addSources("BASE_PLATFORM_SRC")
-addSources("NET_PLATFORM_SRC")
-addSources("NET_SRC")
+
+
+if (net) then
+	addSources("NET_PLATFORM_SRC")
+	addSources("NET_SRC")
+end
 
 if (gl) then
 	addSources("OPENGL_SRC")

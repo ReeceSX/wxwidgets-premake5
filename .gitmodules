@@ -1,3 +1,15 @@
 [submodule "Example/wxWidgets"]
 	path = Example/wxWidgets
 	url = https://github.com/wxWidgets/wxWidgets
+[submodule "Example/Vendor/Compression/ZLib"]
+	path = Example/Vendor/Compression/ZLib
+	url = https://github.com/auroraengine/ZLib
+[submodule "Example/Vendor/Graphics/harfbuzz"]
+	path = Example/Vendor/Graphics/harfbuzz
+	url = https://github.com/auroraengine/harfbuzz
+[submodule "Example/Vendor/Graphics/freetype"]
+	path = Example/Vendor/Graphics/freetype
+	url = https://github.com/auroraengine/freetype2
+[submodule "Example/Vendor/Media/libpng"]
+	path = Example/Vendor/Media/libpng
+	url = https://github.com/auroraengine/libpng

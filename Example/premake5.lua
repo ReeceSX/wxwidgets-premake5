@@ -2,14 +2,14 @@
 -- globals
 -------------------------------------------------------
 _G._projects = {}
+_G.linux = os.get() == "linux"
+_G.win32 = os.get() == "windows"
 
 function includeProject(name)
-    print("including", name)
     includedirs(_G._projects[name].inc)
     links(name)
 end
 _G.includeProject = includeProject
-
 
 -------------------------------------------------------
 -- create workspace 
@@ -37,41 +37,24 @@ workspace "WxExample Premake5"
     flags { "NoIncrementalLink" }
     editandcontinue "Off"
 
-    if (not isWin) then
+    if (not _G.win32) then
         toolset "clang"
 
         buildoptions {"-fms-extensions"}
+
+		disablewarnings {
+			-- we live life on the edge
+			"unused-result",
+			-- warning: unused unused enumeration
+			"unused-value",
+			-- idk what this is but its annoying me
+			"unknown-warning-option"
+		}
     end
-
-    disablewarnings {
-        -- we live life on the edge
-        "unused-result",
-        -- warning: unused unused enumeration
-        "unused-value",
-        -- idk what this is but its annoying me
-        "unknown-warning-option"
-
-    }
-
-
 -------------------------------------------------------
 function includeOSRuntime()
-    if (true) then
----------------------------
---        -- weird elf quirk
---        -- some cairo/x11/whatever ELF module will have an an UNDEF symbol referencing png/libz 
---        -- ld will find said file in the system libraries folder[s] and then cock-block the symbol name.
---        --  we need to include our cake first for us to link 
---        --  **OUR** references to **OUR** static library. 
---        -- we'll strip symbols so hopefully we dont mess with the ABI of other external libs 
---        --  such is the only way i could think of this being an issue
---        includeProject("AuroraPng")
---        includeProject("AuroraZLib")
 
-        -- ignore everything above here if you are not compile zlib/png
-        links "png"
-        links "z"
--------------------------------
+    if (_G.linux) then
         links "pthread"
         links "gtk-3"
         links "gdk-3"
@@ -94,15 +77,17 @@ function includeOSRuntime()
         links "Xt"
         links "SM"
     elseif (_G.win32) then
-        -- DX Compiler etc
+        links "Comctl32.lib"
+        links "Rpcrt4.lib"
+		links "Shlwapi.lib"
     end
 end
 
 function includeWxWidgets()
-    includedirs "wxWidgets/include"
+    includedirs "wxWidgets/include/"
     includedirs "wxWidgets/src/common/"
 
-    includedirs "wxConfig"
+    includedirs "wxConfig/"
 
     links "AuroraWxRegex"
     links "AuroraScintilla"
@@ -112,27 +97,73 @@ function includeWxWidgets()
 
     if (_G.linux) then
         _G.includeBaseGtk()
-
     end 
 end
 
-
-function includePipelineDeps()
-    includeOSRuntime()
-    --includeExtendedRuntime()
-    --includeDX(true)
-    --includeCompression()
-    --includeGraphicsCommon()
-    --includePipelineMedia()
-    includeWxWidgets()
-end 
-
--------------------------------------------------------
-
-require("wxwidgets-example")
-
 -------------------------------------------------------
 boilerplateProject = require("boilerplateProject")
+-------------------------------------------------------
 
-boilerplateProject("WxClockSample", "ConsoleApp", "WxClockSample/Source")
-includePipelineDeps()
+boilerplateProject("AuroraZLib", "StaticLib", "Vendor/Compression/ZLib", "Vendor/Compression/ZLib")
+excludes "Vendor/Compression/ZLib/contrib/**.*"
+excludes "Vendor/Compression/ZLib/examples/**.*"
+excludes "Vendor/Compression/ZLib/test/**.*"
+
+boilerplateProject( "AuroraPng",
+                    "StaticLib",
+                    "Vendor/Media/libpng",
+                    "Vendor/Media/libpng")
+
+excludes "Vendor/Media/libpng/mips/**.c"
+excludes "Vendor/Media/libpng/intel/**.c"
+excludes "Vendor/Media/libpng/powerpc/**.c"
+excludes "Vendor/Media/libpng/arm/**.c"
+files "Vendor/Media/libpng/intel/**.c"
+defines "PNG_INTEL_SSE_OPT=1"
+includeProject("AuroraZLib")
+
+
+boilerplateProject( "AuroraFreetype",
+                    "StaticLib",
+                    "Vendor/Graphics/freetype/src",
+                    "Vendor/Graphics/freetype/include")
+defines "USE_HARFBUZZ=0"
+defines "FT_CONFIG_OPTION_SYSTEM_ZLIB=1"
+defines "FT2_BUILD_LIBRARY=1"
+excludes "Vendor/Graphics/freetype/src/lzw/**.c"
+excludes "Vendor/Graphics/freetype/src/gzip/**.c"
+excludes "Vendor/Graphics/freetype/src/tools/**.c"
+excludes "Vendor/Graphics/freetype/src/gxvalid/**.c"
+includeProject("AuroraZLib")
+
+boilerplateProject( "AuroraHarfbuzz",
+                    "StaticLib",
+                    "Vendor/Graphics/harfbuzz/src",
+                    "Vendor/Graphics/harfbuzz/src")
+
+excludes "Vendor/Graphics/harfbuzz/src/test-*.*"
+excludes "Vendor/Graphics/harfbuzz/src/dump-*.*"
+excludes "Vendor/Graphics/harfbuzz/src/failing-*.*"
+excludes "Vendor/Graphics/harfbuzz/src/hb-glib.cc"
+excludes "Vendor/Graphics/harfbuzz/src/hb-gdi.cc"
+excludes "Vendor/Graphics/harfbuzz/src/main.cc"
+excludes "Vendor/Graphics/harfbuzz/src/test.cc"
+excludes "Vendor/Graphics/harfbuzz/src/hb-gobject-structs.cc"
+
+defines "HAVE_FREETYPE=1"
+includeProject("AuroraFreetype")
+includeProject("AuroraZLib")
+includeProject("AuroraPng")
+
+-------------------------------------------------------
+require("wxwidgets-example")
+-------------------------------------------------------
+
+boilerplateProject("WxClockSample", "WindowedApp", "WxClockSample/Source")
+includeWxWidgets()
+includeProject("AuroraHarfbuzz")
+includeProject("AuroraFreetype")
+includeProject("AuroraPng")
+includeProject("AuroraZLib")
+
+includeOSRuntime()
