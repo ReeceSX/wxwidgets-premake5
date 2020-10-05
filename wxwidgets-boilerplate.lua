@@ -2,18 +2,21 @@
 -- Intended to use internal apis from the root source directory (not Build_Scripts, due to a bug in includeProject)
 -- Other projects should adapt from this
 -- The `setup` function contains boilerplate such as 'project', cppdielect, language, common includes, common defintions, etc 
--- `includeProject` add a dependency given an internal aurora name 
+-- `includeProject` adds a dependency given an internal aurora name 
 -- `path` defines the source root
 
-local setup     = require("boilerplateProject")
+local setup      = require("boilerplateProject")
+
+-- TODO: make your own config and directory to house custom configs in
+local configPath = "lib/wx/include/gtk3-unicode-static-3.1/"
 
 local gl         = true
-local path      = "Vendor/Graphics/wxWidgets/"
-local gtk_linux = _G.linux  
-local windows   = _G.win32
+local path       = "Vendor/Graphics/wxWidgets/"
+local gtk_linux  = _G.linux  
+local windows    = _G.win32
 
-local platform_macro = "whatFuckingBullshit"
-local wxvars  = {}
+local platform_macro = "__WXUNKNOWNPLATFORM_"
+local wxvars         = {}
 
 if (windows) then
 	platform_macro = "__WXMSW__"
@@ -42,59 +45,67 @@ function includeBaseGtk()
 	includedirs "/usr/include/cairo"
 	includedirs "/usr/lib/glib-2.0/include"
 end
+_G.includeBaseGtk = includeBaseGtk 
+
+_G.wxGlobals = {"__WX__", "wxUSE_GUI=1", "wxUSE_BASE=1", platform_macro,"_FILE_OFFSET_BITS=64"}
 
 -- aurorawxregex
-setup("AuroraWxRegex", "StaticLib")
-defines "__WXGTK__"
-files ({path .. "src/regex/regcomp.c", path .. "src/regex/regexec.c", path .. "src/regex/regerror.c", path .. "src/regex/regfree.c"})
-includedirs(path .. "include/")
-includedirs(path .. "src/common/")
-includedirs(path .. "lib/wx/include/gtk3-unicode-static-3.1/")
+setup("AuroraWxRegex", "StaticLib", nil, path .. "include")
+defines "platform_macro"
+local regexFiles = 
+{
+	path .. "src/regex/regcomp.c", 
+	path .. "src/regex/regexec.c",
+	path .. "src/regex/regerror.c",
+	path .. "src/regex/regfree.c"
+}
+files (regexFiles)
+includedirs(path .. configPath)
 
 -- aurorascintilla
-setup("AuroraScintilla", "StaticLib")
+setup("AuroraScintilla", "StaticLib", path .. "src/stc/scintilla/src",  path .. "src/stc/scintilla/include")
 defines({"__WX__", "SCI_LEXER", "NO_CXX11_REGEX", "LINK_LEXERS", platform_macro, "_FILE_OFFSET_BITS=64"})
 
-files(path .. "src/stc/scintilla/*")
-
 includedirs(path .. "include/")
-includedirs(path .. "src/common/")
-includedirs(path .. "src/stc/scintilla/src/")
+includedirs(path .. configPath)
+includedirs(path .. "src/stc/scintilla/src")
 includedirs(path .. "src/stc/scintilla/lexlib/")
 includedirs(path .. "src/stc/scintilla/lexers/")
-includedirs(path .. "src/stc/scintilla/include/")
-includedirs(path .. "lib/wx/include/gtk3-unicode-static-3.1/")
-
-print(wxvars)
 
 addSources("STC_SRC")
 
-incDep("harfbuzz")
-incDep("freetype")
 
 if (gtk_linux) then
+	incDep("AuroraHarfbuzz")
+	incDep("AuroraFreetype")
+
+	includedirs "/usr/include/libmount"
+	includedirs "/usr/include/atk-1.0"
+	
 	includeBaseGtk()
 end
 
 includedirs("gdk/include")
 
 -- aurorawxwidgets
-setup("AuroraWxWidgets", "StaticLib")
-defines({"__WX__", "WXBUILDING", "wxUSE_GUI=1", "wxUSE_BASE=1", platform_macro, "_FILE_OFFSET_BITS=64"})
+setup("AuroraWxWidgets", "StaticLib", nil, path .. "include")
+defines(_G.wxGlobals)
 
-links "AuroraWxRegex"
-links "AuroraScintilla"
+defines "WXBUILDING"
 
-includedirs(path .. "include/")
+links  "AuroraWxRegex"
+incDep "AuroraScintilla" 
+
 includedirs(path .. "src/common/")
 includedirs(path .. "src/regex/")
 includedirs(path .. "src/stc/scintilla/include/")
-includedirs(path .. "lib/wx/include/gtk3-unicode-static-3.1/")
 
-incDep("harfbuzz")
-incDep("ZLib")
-incDep("libpng")
-incDep("freetype")
+includedirs(path .. configPath)
+
+incDep("AuroraZLib")
+incDep("AuroraPng")
+incDep("AuroraHarfbuzz")
+incDep("AuroraFreetype")
 
 if (gtk_linux) then
 	-- CPP abis are violate and heavily implementation defined
@@ -113,9 +124,8 @@ if (gtk_linux) then
 	includedirs "/usr/include/atk-1.0"
 	includedirs "/usr/include/at-spi2-atk/2.0"
 else
-	-- TODO: opengl sdk. i think it's included in modern winsdks, not sure
+	-- TODO: ??
 end
-
 
 addSources("XML_SRC")
 addSources("CORE_SRC")
@@ -124,4 +134,7 @@ addSources("BASE_AND_GUI_SRC")
 addSources("BASE_PLATFORM_SRC")
 addSources("NET_PLATFORM_SRC")
 addSources("NET_SRC")
-addSources("OPENGL_SRC")
+
+if (gl) then
+	addSources("OPENGL_SRC")
+end
