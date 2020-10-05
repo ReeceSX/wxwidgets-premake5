@@ -51,6 +51,16 @@ workspace "WxExample Premake5"
 			"unknown-warning-option"
 		}
     end
+
+    if (_G.win32) then
+        defines "AURORA_PLATFORM_WIN32"
+    elseif (_G.linux) then
+        defines "AURORA_PLATFORM_LINUX"
+    end
+
+    defines "AURORA_ARCH_X64"
+-------------------------------------------------------
+wxWidgets = require("wxwidgets-example")
 -------------------------------------------------------
 function includeOSRuntime()
 
@@ -93,10 +103,10 @@ function includeWxWidgets()
     links "AuroraScintilla"
     links "AuroraWxWidgets"
 
-    defines (_G.wxGlobals)
+    defines (wxWidgets.wxGlobals)
 
-    if (_G.linux) then
-        _G.includeBaseGtk()
+    if (wxWidgets.linux) then
+        wxWidgets.includeBaseGtk()
     end 
 end
 
@@ -156,7 +166,7 @@ includeProject("AuroraZLib")
 includeProject("AuroraPng")
 
 -------------------------------------------------------
-require("wxwidgets-example")
+wxWidgets.setupWxWidgets()
 -------------------------------------------------------
 
 boilerplateProject("WxClockSample", "WindowedApp", "WxClockSample/Source")

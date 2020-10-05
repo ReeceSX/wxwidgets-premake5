@@ -3,128 +3,262 @@
  * only once and to indicate that we are building using configure. */
 #ifndef __WX_SETUP_H__
 #define __WX_SETUP_H__
+#pragma once
 
-/* never undefine inline or const keywords for C++ compilation */
-#ifndef __cplusplus
+//#include "AuroraEnvrionment.h"
 
-/* Define to empty if the keyword does not work.  */
-/* #undef const */
-
-/* Define as __inline if that's what the C compiler calls it.  */
-/* #undef inline */
-
-#endif /* __cplusplus */
-
-/* the installation location prefix from configure */
-#define wxINSTALL_PREFIX "/usr/local"
-
-/* Define to `int' if <sys/types.h> doesn't define.  */
-/* #undef gid_t */
-
-/* Define to `int' if <sys/types.h> doesn't define.  */
-/* #undef mode_t */
-
-/* Define to `long' if <sys/types.h> doesn't define.  */
-/* #undef off_t */
-
-/* Define to `int' if <sys/types.h> doesn't define.  */
-/* #undef pid_t */
-
-/* Define to `unsigned' if <sys/types.h> doesn't define.  */
-/* #undef size_t */
-
-/* Define if you have the ANSI C header files.  */
-#define STDC_HEADERS 1
-
-/* Define this to get extra features from GNU libc. */
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE 1
+#if defined (AURORA_PLATFORM_LINUX)
+  #define wxINSTALL_PREFIX "/usr/local"
+#else
+  #define wxINSTALL_PREFIX "./"
 #endif
 
-/* Define to `int' if <sys/types.h> doesn't define.  */
-/* #undef uid_t */
+#define STDC_HEADERS 1
+#ifndef _GNU_SOURCE
+  #define _GNU_SOURCE 1
+#endif
 
-/* Define if your processor stores words with the most significant
-   byte first (like Motorola and SPARC, unlike Intel and VAX).  */
-/* #undef WORDS_BIGENDIAN */
+#if defined(AURORA_PLATFORM_LINUX)
+  #define HAVE_GCC_ATOMIC_BUILTINS 1
+  #define HAVE_SSIZE_T 1
 
-/* Define this if your version of GTK+ is greater than 1.2.7 */
-/* #undef __WXGTK127__ */
+  #define __WXGTK20__ 1
+  #define __WXGTK210__ 1
+  #define __WXGTK218__ 1
+  #define __WXGTK220__ 1
+  #define __WXGTK3__ 1
 
-#if defined(__WXGTK__)
+  /* Define this if your version of GTK+ is >= 3.90.0 */
+  /* #undef __WXGTK4__ */
 
-/* Define if ssize_t type is available.  */
-#define HAVE_SSIZE_T 1
+  /* Define this if you want to use GPE features */
+  /* #undef __WXGPE__ */
 
-/* Define this if your version of GTK+ is greater than 2.0 */
-#define __WXGTK20__ 1
+  /* Define this if your version of Motif is greater than 2.0 */
+  /* #undef __WXMOTIF20__ */
 
-/* Define this if your version of GTK+ is greater than 2.10 */
-#define __WXGTK210__ 1
+  /* Define this if you are using Lesstif */
+  /* #undef __WXLESSTIF__ */
 
-/* Define this if your version of GTK+ is greater than 2.18 */
-#define __WXGTK218__ 1
+  /* Define if you have the dladdr function.  */
+  #define HAVE_DLADDR 1
 
-/* Define this if your version of GTK+ is greater than 2.20 */
-#define __WXGTK220__ 1
+  #define wxUSE_UNIX 1
+  #define wxUSE_CAIRO 1
 
-/* Define this if your version of GTK+ is >= 3.0 */
-#define __WXGTK3__ 1
+  #define wxUSE_WEBVIEW_IE 0
+  #define wxUSE_WEBVIEW_EDGE 0
 
-/* Define this if your version of GTK+ is >= 3.90.0 */
-/* #undef __WXGTK4__ */
+  #define __UNIX__ 1
+  #define __LINUX__ 1
 
-/* Define this if you want to use GPE features */
-/* #undef __WXGPE__ */
+  /* The number of bytes in a wchar_t.  */
+  #define SIZEOF_WCHAR_T 4
 
-/* Define this if your version of Motif is greater than 2.0 */
-/* #undef __WXMOTIF20__ */
+  /* The number of bytes in a int.  */
+  #define SIZEOF_INT 4
 
-/* Define this if you are using Lesstif */
-/* #undef __WXLESSTIF__ */
+  #if defined(AURORA_ARCH_X86)
+    #define __AUR_MACHINE_WORD_SIZE 4
+  #elif defined(AURORA_ARCH_X64)
+   #define __AUR_MACHINE_WORD_SIZE 8
+  #elif defined(AURORA_ARCH_ARM)
+    #define __AUR_MACHINE_WORD_SIZE 8
+  #else
+    #error unsupported architecture. currently supports: aarch64, x86_64, x86_32
+  #endif
 
-/* Define if you have the dladdr function.  */
-#define HAVE_DLADDR 1
+  /* The number of bytes in a pointer.  */
+  #define SIZEOF_VOID_P __AUR_MACHINE_WORD_SIZE
 
-/*
- * Define to 1 for Unix[-like] system
- */
-#define wxUSE_UNIX 1
+  /* The number of bytes in a long.  */
+  #define SIZEOF_LONG __AUR_MACHINE_WORD_SIZE
 
-#define __UNIX__ 1
+  /* The number of bytes in a long long.  */
+  #define SIZEOF_LONG_LONG 8
 
-/* #undef __AIX__ */
-/* #undef __BSD__ */
-/* #undef __DARWIN__ */
-/* #undef __EMX__ */
-/* #undef __FREEBSD__ */
-/* #undef __HPUX__ */
-#define __LINUX__ 1
-/* #undef __NETBSD__ */
-/* #undef __OPENBSD__ */
-/* #undef __OSF__ */
-/* #undef __QNX__ */
-/* #undef __SGI__ */
-/* #undef __SOLARIS__ */
-/* #undef __SUN__ */
-/* #undef __SUNOS__ */
-/* #undef __SVR4__ */
-/* #undef __SYSV__ */
-/* #undef __ULTRIX__ */
-/* #undef __UNIXWARE__ */
-/* #undef __VMS__ */
-/* #undef __IA64__ */
-/* #undef __ALPHA__ */
+  /* The number of bytes in a short.  */
+  #define SIZEOF_SHORT 2
 
-#elif defined(__WXMSW__)
+  /* The number of bytes in a size_t.  */
+  #define SIZEOF_SIZE_T __AUR_MACHINE_WORD_SIZE
 
+  #define wxUSE_UXTHEME           0
+
+  /* Define if you have the <unistd.h> header file.  */
+  #define HAVE_UNISTD_H 1
+
+  /* struct tm doesn't always have the tm_gmtoZ_HAVE_UNISTD_Hff field, define this if it does */
+  #define WX_GMTOFF_IN_TM 1
+
+  /* Define if you have dlopen() */
+  #define HAVE_DLOPEN 1
+
+  /* Define if you have gettimeofday() */
+  #define HAVE_GETTIMEOFDAY 1
+
+  /* Define if you have the inet_aton function.  */
+  #define HAVE_INET_ATON 1
+
+  /* The type of 3rd argument to getsockname() - usually size_t or int */
+  #define WX_SOCKLEN_T socklen_t
+
+  /* The type of 5th argument to getsockopt() - usually size_t or int */
+  #define SOCKOPTLEN_T socklen_t
+
+  /* Define if you have a getservbyname_r function taking 6 arguments. */
+  #define HAVE_FUNC_GETSERVBYNAME_R_6 1
+
+  /* Define if you have a getservbyname_r function taking 5 arguments. */
+  /* #undef HAVE_FUNC_GETSERVBYNAME_R_5 */
+
+  /* Define if you have a getservbyname_r function taking 4 arguments. */
+  /* #undef HAVE_FUNC_GETSERVBYNAME_R_4 */
+
+  /* Define if you have the <langinfo.h> header file.  */
+  #define HAVE_LANGINFO_H 1
+
+  #define wxUSE_REGKEY 0
+
+  /* Define if you have the gmtime_r function.  */
+  #define HAVE_GMTIME_R 1
+
+  /* Define if you have abi::__forced_unwind in your <cxxabi.h>. */
+  #define HAVE_ABI_FORCEDUNWIND 1
+
+  /* Define if fdopen is available.  */
+  #define HAVE_FDOPEN 1
+
+  /* Define if sysconf is available. */
+  #define HAVE_SYSCONF 1
+
+  /* Define if getpwuid_r is available. */
+  #define HAVE_GETPWUID_R 1
+
+  /* Define if getgrgid_r is available. */
+  #define HAVE_GETGRGID_R 1
+
+  /* Define if setpriority() is available. */
+  #define HAVE_SETPRIORITY 1
+
+  /* Define if you have inotify_xxx() functions. */
+  #define wxHAS_INOTIFY 1
+
+  /* Define if you have strtok_r function. */
+  #define HAVE_STRTOK_R 1
+
+  /* Define if you have the uname function.  */
+  #define HAVE_UNAME 1
+
+  /* Define if you have the unsetenv function.  */
+  #define HAVE_UNSETENV 1
+
+  /* Define if you have the <X11/XKBlib.h> header file.  */
+  #define HAVE_X11_XKBLIB_H 1
+
+  /* Define if you have the <X11/extensions/xf86vmode.h> header file.  */
+  #define HAVE_X11_EXTENSIONS_XF86VMODE_H 1
+
+  /* Define if you have the <sched.h> header file.  */
+  #define HAVE_SCHED_H 1
+
+  /* Define if you have the localtime_r function.  */
+  #define HAVE_LOCALTIME_R 1
+
+  /* Define if you have the <iconv.h> header file and iconv() symbol.  */
+  #define HAVE_ICONV 1
+
+  /* Define if you have a gethostbyname_r function taking 6 arguments. */
+  #define HAVE_FUNC_GETHOSTBYNAME_R_6 1
+
+  /* Define if you have a gethostbyname_r function taking 5 arguments. */
+  /* #undef HAVE_FUNC_GETHOSTBYNAME_R_5 */
+
+  /* Define if you have a gethostbyname_r function taking 3 arguments. */
+  /* #undef HAVE_FUNC_GETHOSTBYNAME_R_3 */
+
+  /* Define if you have the mktemp function.  */
+  /* #undef HAVE_MKTEMP */
+
+  /* Define if you have the mkstemp function.  */
+  #define HAVE_MKSTEMP 1
+
+  /* Define if you have pthread_setconcurrency function */
+  #define HAVE_PTHREAD_SET_CONCURRENCY 1
+
+  #define wxUSE_WINSOCK2 0
+#elif defined(AURORA_PLATFORM_WIN32)
+
+  #define wxUSE_WEBVIEW_IE 0
+  #define wxUSE_WEBVIEW_EDGE 0
+
+  #define wxUSE_UXTHEME 1
+  #define wxUSE_REGKEY 1
+  #define WX_SOCKLEN_T int
+  #define SOCKOPTLEN_T int
+
+  /* Define if size_t on your machine is the same type as unsigned int. */
+
+  #define wxSIZE_T_IS_UINT
+  #define wxUSE_WINSOCK2 1
+
+#else
+
+
+  #define wxUSE_WINSOCK2 0
 #endif 
 
-/* NanoX (with wxX11) */
-#define wxUSE_NANOX 0
+#if defined(__UNIX__)
+  #define HAVE_GCC_ATOMIC_BUILTINS 1
 
-/* PowerPC Darwin & Mac OS X */
-/* #undef __POWERPC__ */
+  // na. sdl is annoying
+  #define wxUSE_LIBSDL 0
+  // no plugin support
+  #define wxUSE_PLUGINS 0
+  // use internal printf
+  #define wxUSE_GTKPRINT 0
+  // optional:
+  #define wxUSE_LIBGNOMEVFS 0
+  // TODO: enable notifications
+  #define wxUSE_LIBNOTIFY 0
+  #define wxUSE_LIBNOTIFY_0_7 0
+  #define wxHAVE_LIB_XPM 0
+
+  // threads
+  #define wxHAVE_PTHREAD_CLEANUP 1
+
+  /*
+   * Unix-specific options
+   */
+  #define wxUSE_SELECT_DISPATCHER 1
+  #define wxUSE_EPOLL_DISPATCHER 1
+
+
+  /*
+     Use GStreamer for Unix.
+
+     Default is 0 as this requires a lot of dependencies which might not be
+     available.
+
+     Recommended setting: 1 (wxMediaCtrl won't work by default without it).
+   */
+  #define wxUSE_GSTREAMER 1
+
+  #define wxUSE_GSTREAMER_PLAYER 1
+
+  /*
+     Use XTest extension to implement wxUIActionSimulator?
+
+     Default is 1, it is set to 0 if the necessary headers/libraries are not
+     found by configure.
+
+     Recommended setting: 1, wxUIActionSimulator won't work in wxGTK3 without it.
+   */
+  #define wxUSE_XTEST 0
+#endif 
+
+
+#define wxUSE_NANOX 0
 
 /* Hack to make IOGraphicsTypes.h not define Point conflicting with MacTypes */
 /* #undef __Point__ */
@@ -132,229 +266,120 @@
 /* MS-DOS with DJGPP */
 /* #undef __DOS__ */
 
-/* Stupid hack; __WINDOWS__ clashes with wx/defs.h */
-#ifndef __WINDOWS__
-/* #undef __WINDOWS__ */
-#endif
-
-#ifndef __WIN32__
-/* #undef __WIN32__ */
-#endif
-#ifndef __GNUWIN32__
-/* #undef __GNUWIN32__ */
-#endif
-#ifndef STRICT
-/* #undef STRICT */
-#endif
-#ifndef WINVER
-/* #undef WINVER */
-#endif
 
 /* --- start common options --- */
 
-#ifndef wxUSE_GUI
-    #define wxUSE_GUI 1
-#endif
+#define wxUSE_GUI 1
 
+#define wxUSE_ZLIB 1
+#define wxUSE_LIBLZMA       0
+
+
+#define wxUSE_IPV6          0
+#define wxUSE_URL_NATIVE    0
+#define wxUSE_XRC           0
 
 #define WXWIN_COMPATIBILITY_2_8 0
-
 #define WXWIN_COMPATIBILITY_3_0 1
 
 #define wxDIALOG_UNIT_COMPATIBILITY   0
 
 #define wxUSE_UNSAFE_WXSTRING_CONV 1
-
 #define wxUSE_REPRODUCIBLE_BUILD 0
-
-
-
 #define wxUSE_ON_FATAL_EXCEPTION 1
-
 #define wxUSE_STACKWALKER 1
-
 #define wxUSE_DEBUGREPORT 1
 
 
-
 #define wxUSE_DEBUG_CONTEXT 0
-
 #define wxUSE_MEMORY_TRACING 0
-
 #define wxUSE_GLOBAL_MEMORY_OPERATORS 0
-
 #define wxUSE_DEBUG_NEW_ALWAYS 0
-
-#ifndef wxUSE_UNICODE
-    #define wxUSE_UNICODE 1
-#endif
-
+#define wxUSE_UNICODE 1
 #define wxUSE_EXCEPTIONS 1
-
 #define wxUSE_EXTENDED_RTTI 0
-
 #define wxUSE_LOG 1
-
 #define wxUSE_LOGWINDOW 1
-
 #define wxUSE_LOGGUI 1
-
 #define wxUSE_LOG_DIALOG 1
-
 #define wxUSE_CMDLINE_PARSER 1
-
 #define wxUSE_THREADS 1
-
 #define wxUSE_STREAMS 1
-
 #define wxUSE_PRINTF_POS_PARAMS 1
-
 #define wxUSE_COMPILER_TLS 1
-
-
 #define wxUSE_STL 1
-
 #define wxUSE_STD_DEFAULT  0
-
 #define wxUSE_STD_CONTAINERS_COMPATIBLY 1
-
 #define wxUSE_STD_CONTAINERS 1
-
 #define wxUSE_STD_IOSTREAM 1
-
 #define wxUSE_STD_STRING 1
-
 #define wxUSE_STD_STRING_CONV_IN_WXSTRING wxUSE_STL
-
-
 #define wxUSE_LONGLONG 1
-
 #define wxUSE_BASE64 1
-
 #define wxUSE_CONSOLE_EVENTLOOP 1
-
 #define wxUSE_FILE 1
 #define wxUSE_FFILE 1
-
 #define wxUSE_FSVOLUME 1
-
 #define wxUSE_SECRETSTORE 1
-
 #define wxUSE_STDPATHS 1
-
 #define wxUSE_TEXTBUFFER 1
-
 #define wxUSE_TEXTFILE 1
-
 #define wxUSE_INTL 1
-
 #define wxUSE_XLOCALE 1
-
 #define wxUSE_DATETIME 1
-
 #define wxUSE_TIMER 1
-
 #define wxUSE_STOPWATCH 1
-
 #define wxUSE_FSWATCHER 1
-
 #define wxUSE_CONFIG 1
-
 #define wxUSE_CONFIG_NATIVE 1
-
 #define wxUSE_DIALUP_MANAGER 1
-
 #define wxUSE_DYNLIB_CLASS 1
-
 #define wxUSE_DYNAMIC_LOADER 1
-
 #define wxUSE_SOCKETS 1
-
-#define wxUSE_IPV6          0
-
 #define wxUSE_FILESYSTEM 1
-
 #define wxUSE_FS_ZIP 1
-
 #define wxUSE_FS_ARCHIVE 1
-
 #define wxUSE_FS_INET 1
-
 #define wxUSE_ARCHIVE_STREAMS 1
-
 #define wxUSE_ZIPSTREAM 1
-
 #define wxUSE_TARSTREAM 1
-
-#define wxUSE_ZLIB 1
-
-#define wxUSE_LIBLZMA       0
-
 #define wxUSE_APPLE_IEEE 1
-
 #define wxUSE_JOYSTICK 1
-
 #define wxUSE_FONTENUM 1
-
 #define wxUSE_FONTMAP 1
-
 #define wxUSE_MIMETYPE 1
-
 #define wxUSE_PROTOCOL 1
-
 #define wxUSE_PROTOCOL_FILE 1
 #define wxUSE_PROTOCOL_FTP 1
 #define wxUSE_PROTOCOL_HTTP 1
-
 #define wxUSE_URL 1
-
-#define wxUSE_URL_NATIVE 0
-
 #define wxUSE_VARIANT 1
-
 #define wxUSE_ANY 1
-
 #define wxUSE_REGEX 1
-
 #define wxUSE_SYSTEM_OPTIONS 1
-
 #define wxUSE_SOUND 1
-
 #define wxUSE_MEDIACTRL 0
-
-#define wxUSE_XRC       0
-
 #define wxUSE_XML       wxUSE_XRC
-
 #define wxUSE_AUI 1
-
 #define wxUSE_RIBBON 1
-
 #define wxUSE_PROPGRID 1
-
 #define wxUSE_STC 1
 
-#define wxUSE_WEBVIEW 0
-
-#ifdef __WXMSW__
-  #define wxUSE_WEBVIEW_IE 0
+#if defined(wxUSE_WEBVIEW_WEBKIT) || defined(wxUSE_WEBVIEW_WEBKIT2) || defined(wxUSE_WEBVIEW_EDGE) || defined(wxUSE_WEBVIEW_IE)
+  #define wxUSE_WEBVIEW 1
 #else
-  #define wxUSE_CAIRO 1
+  #define wxUSE_WEBVIEW 0
+#endif 
 
-  #define wxUSE_WEBVIEW_IE 0
-
-  #define wxUSE_WEBVIEW_EDGE 0
-  #endif
-
-  #if (defined(__WXGTK__) && !defined(__WXGTK3__)) || defined(__WXOSX__)
+#if (defined(__WXGTK__) && !defined(__WXGTK3__)) || defined(__WXOSX__)
   #define wxUSE_WEBVIEW_WEBKIT 0
-  #else
+#else
   #define wxUSE_WEBVIEW_WEBKIT 0
-  #endif
+#endif
 
-  #if defined(__WXGTK3__)
+#if defined(__WXGTK3__)
   #define wxUSE_WEBVIEW_WEBKIT2 1
-  #else
+#else
   #define wxUSE_WEBVIEW_WEBKIT2 1
 #endif
 
@@ -454,11 +479,10 @@
 #define wxUSE_VALIDATORS 1
 
 #ifdef __WXMSW__
-#define wxUSE_AUTOID_MANAGEMENT 0
+  #define wxUSE_AUTOID_MANAGEMENT 0
 #else
-#define wxUSE_AUTOID_MANAGEMENT 0
+  #define wxUSE_AUTOID_MANAGEMENT 0
 #endif
-
 
 #define wxUSE_COMMON_DIALOGS 0
 #define wxUSE_BUSYINFO 1
@@ -527,7 +551,6 @@
 #define wxUSE_ICO_CUR 1
 #define wxUSE_PALETTE 1
 
-
 #define wxUSE_ALL_THEMES    0
 
 #define wxUSE_THEME_GTK     0
@@ -537,36 +560,9 @@
 
 /* --- end common options --- */
 
-/*
- * Unix-specific options
- */
-#define wxUSE_SELECT_DISPATCHER 1
-#define wxUSE_EPOLL_DISPATCHER 1
 
 #define wxUSE_UNICODE_UTF8 1
 #define wxUSE_UTF8_LOCALE_ONLY 0
-
-/*
-   Use GStreamer for Unix.
-
-   Default is 0 as this requires a lot of dependencies which might not be
-   available.
-
-   Recommended setting: 1 (wxMediaCtrl won't work by default without it).
- */
-#define wxUSE_GSTREAMER 1
-
-#define wxUSE_GSTREAMER_PLAYER 1
-
-/*
-   Use XTest extension to implement wxUIActionSimulator?
-
-   Default is 1, it is set to 0 if the necessary headers/libraries are not
-   found by configure.
-
-   Recommended setting: 1, wxUIActionSimulator won't work in wxGTK3 without it.
- */
-#define wxUSE_XTEST 0
 
 /* --- start MSW options --- */
 
@@ -582,9 +578,7 @@
 
 
 #define wxUSE_OLE           1
-
 #define wxUSE_OLE_AUTOMATION 0
-
 #define wxUSE_ACTIVEX 0
 
 #if defined(_MSC_VER) && _MSC_VER >= 1700 && !defined(_USING_V110_SDK71_)
@@ -594,32 +588,16 @@
 #endif
 
 #define wxUSE_DC_CACHEING 0
-
 #define wxUSE_WXDIB 0
-
 #define wxUSE_POSTSCRIPT_ARCHITECTURE_IN_MSW 0
-
-
 #define wxUSE_RICHEDIT 1
-
 #define wxUSE_RICHEDIT2 1
-
 #define wxUSE_OWNER_DRAWN 0
-
 #define wxUSE_TASKBARICON_BALLOONS 1
-
 #define wxUSE_TASKBARBUTTON 0
-
-
 #define wxUSE_INKEDIT  0
-
 #define wxUSE_INICONF 0
-
-#define wxUSE_WINSOCK2 0
-
-
 #define wxUSE_DATEPICKCTRL_GENERIC 0
-
 #define wxUSE_TIMEPICKCTRL_GENERIC 0
 
 
@@ -709,72 +687,10 @@
 #define HAVE_TYPE_TRAITS 1
 
 /*
- * Define if the compiler supports simple visibility declarations.
- */
-/* #undef HAVE_VISIBILITY */
-
-/*
- * Define if the compiler supports GCC's atomic memory access builtins
- */
-
-#if !defined(__WXMSW__)
-#define HAVE_GCC_ATOMIC_BUILTINS 1
-#endif
-
-/*
- * Define if compiler's visibility support in libstdc++ is broken
- */
-/* #undef HAVE_BROKEN_LIBSTDCXX_VISIBILITY */
-
-/*
- * The built-in regex supports advanced REs in additional to POSIX's basic
- * and extended. Your system regex probably won't support this, and in this
- * case WX_NO_REGEX_ADVANCED should be defined.
- */
-/* #undef WX_NO_REGEX_ADVANCED */
-/*
- * On GNU systems use re_search instead of regexec, since the latter does a
- * strlen on the search text affecting the performance of some operations.
- */
-/* #undef HAVE_RE_SEARCH */
-/*
- * Use SDL for audio (Unix)
- */
-#define wxUSE_LIBSDL 0
-
-/*
- * Compile sound backends as plugins
- */
-#define wxUSE_PLUGINS 0
-
-/*
- * Use GTK print for printing under GTK+ 2.10+
- */
-#define wxUSE_GTKPRINT 0
-/*
- * Use GNOME VFS for MIME types
- */
-#define wxUSE_LIBGNOMEVFS 0
-/*
- * Use libnotify library.
- */
-#define wxUSE_LIBNOTIFY 0
-/*
- * Use libnotify 0.7+ API.
- */
-#define wxUSE_LIBNOTIFY_0_7 0
-/*
- * Use libXpm
- */
-#define wxHAVE_LIB_XPM 0
-/*
- * Define if you have pthread_cleanup_push/pop()
- */
-#define wxHAVE_PTHREAD_CLEANUP 1
-/*
  * Define if compiler has __thread keyword.
  */
 /* #undef HAVE___THREAD_KEYWORD */
+
 /*
  * Define if large (64 bit file offsets) files are supported.
  */
@@ -949,18 +865,11 @@
 /* Define if you have wcstoull() and wcstoll() */
 /* #undef HAVE_WCSTOULL */
 
-/* Define if size_t on your machine is the same type as unsigned int. */
-
-#if defined(__WXMSW__)
-#define wxSIZE_T_IS_UINT
-#endif
-
 /* Define if size_t on your machine is the same type as unsigned long. */
 //#define wxSIZE_T_IS_ULONG 1
 
 /* Define if wchar_t is distinct type in your compiler. */
 #define wxWCHAR_T_IS_REAL_TYPE 1
-
 
 
 /* Define if you have Posix fnctl() function. */
@@ -994,152 +903,6 @@
 
 /* Define if you have thr_setconcurrency function */
 /* #undef HAVE_THR_SETCONCURRENCY */
-
-/* Define if you have pthread_setconcurrency function */
-#define HAVE_PTHREAD_SET_CONCURRENCY 1
-
-#if defined(__LINUX__)
-
-/* The number of bytes in a wchar_t.  */
-#define SIZEOF_WCHAR_T 4
-
-/* The number of bytes in a int.  */
-#define SIZEOF_INT 4
-
-/* The number of bytes in a pointer.  */
-#define SIZEOF_VOID_P 8
-
-// TODO: if arch, pick size. otherwise these are pretty typical values for clang/gcc targeting linux x86_32/64
-// the compile-time asserts should catch any issues
-
-/* The number of bytes in a long.  */
-#define SIZEOF_LONG 8
-
-/* The number of bytes in a long long.  */
-#define SIZEOF_LONG_LONG 8
-
-/* The number of bytes in a short.  */
-#define SIZEOF_SHORT 2
-
-/* The number of bytes in a size_t.  */
-#define SIZEOF_SIZE_T 8
-
-#define wxUSE_UXTHEME           0
-
-/* Define if you have the <unistd.h> header file.  */
-#define HAVE_UNISTD_H 1
-
-/* struct tm doesn't always have the tm_gmtoZ_HAVE_UNISTD_Hff field, define this if it does */
-#define WX_GMTOFF_IN_TM 1
-
-/* Define if you have dlopen() */
-#define HAVE_DLOPEN 1
-
-/* Define if you have gettimeofday() */
-#define HAVE_GETTIMEOFDAY 1
-
-/* Define if you have the inet_aton function.  */
-#define HAVE_INET_ATON 1
-
-/* The type of 3rd argument to getsockname() - usually size_t or int */
-#define WX_SOCKLEN_T socklen_t
-
-/* The type of 5th argument to getsockopt() - usually size_t or int */
-#define SOCKOPTLEN_T socklen_t
-
-/* Define if you have a getservbyname_r function taking 6 arguments. */
-#define HAVE_FUNC_GETSERVBYNAME_R_6 1
-
-/* Define if you have a getservbyname_r function taking 5 arguments. */
-/* #undef HAVE_FUNC_GETSERVBYNAME_R_5 */
-
-/* Define if you have a getservbyname_r function taking 4 arguments. */
-/* #undef HAVE_FUNC_GETSERVBYNAME_R_4 */
-
-/* Define if you have the <langinfo.h> header file.  */
-#define HAVE_LANGINFO_H 1
-
-#define wxUSE_REGKEY 0
-
-/* Define if you have the gmtime_r function.  */
-#define HAVE_GMTIME_R 1
-
-/* Define if you have abi::__forced_unwind in your <cxxabi.h>. */
-#define HAVE_ABI_FORCEDUNWIND 1
-
-/* Define if fdopen is available.  */
-#define HAVE_FDOPEN 1
-
-/* Define if sysconf is available. */
-#define HAVE_SYSCONF 1
-
-/* Define if getpwuid_r is available. */
-#define HAVE_GETPWUID_R 1
-
-/* Define if getgrgid_r is available. */
-#define HAVE_GETGRGID_R 1
-
-/* Define if setpriority() is available. */
-#define HAVE_SETPRIORITY 1
-
-/* Define if you have inotify_xxx() functions. */
-#define wxHAS_INOTIFY 1
-
-/* Define if you have strtok_r function. */
-#define HAVE_STRTOK_R 1
-
-/* Define if you have the uname function.  */
-#define HAVE_UNAME 1
-
-/* Define if you have the unsetenv function.  */
-#define HAVE_UNSETENV 1
-
-/* Define if you have the <X11/XKBlib.h> header file.  */
-#define HAVE_X11_XKBLIB_H 1
-
-/* Define if you have the <X11/extensions/xf86vmode.h> header file.  */
-#define HAVE_X11_EXTENSIONS_XF86VMODE_H 1
-
-/* Define if you have the <sched.h> header file.  */
-#define HAVE_SCHED_H 1
-
-/* Define if you have the localtime_r function.  */
-#define HAVE_LOCALTIME_R 1
-
-/* Define if you have the <iconv.h> header file and iconv() symbol.  */
-#define HAVE_ICONV 1
-
-/* Define if you have a gethostbyname_r function taking 6 arguments. */
-#define HAVE_FUNC_GETHOSTBYNAME_R_6 1
-
-/* Define if you have a gethostbyname_r function taking 5 arguments. */
-/* #undef HAVE_FUNC_GETHOSTBYNAME_R_5 */
-
-/* Define if you have a gethostbyname_r function taking 3 arguments. */
-/* #undef HAVE_FUNC_GETHOSTBYNAME_R_3 */
-
-
-/* Define if you have the mktemp function.  */
-/* #undef HAVE_MKTEMP */
-
-/* Define if you have the mkstemp function.  */
-#define HAVE_MKSTEMP 1
-
-/* Define if you have the putenv function.  */
-/* #undef HAVE_PUTENV */
-
-#else
-
-#define wxUSE_UXTHEME 1
-#define wxUSE_REGKEY 1
-
-/* The type of 3rd argument to getsockname() - usually size_t or int */
-#define WX_SOCKLEN_T int
-
-/* The type of 5th argument to getsockopt() - usually size_t or int */
-#define SOCKOPTLEN_T int
-
-#endif
 
 
 /* Define if you have the <fcntl.h> header file.  */
@@ -1249,4 +1012,3 @@
 /* #undef wxHAS_WORKING_GTK_DC_BLIT */
 
 #endif /* __WX_SETUP_H__ */
-
