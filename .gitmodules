@@ -1,6 +1,6 @@
 [submodule "Example/wxWidgets"]
 	path = Example/wxWidgets
-	url = https://github.com/wxWidgets/wxWidgets
+	url = https://github.com/AuroraEngine/wxWidgets
 [submodule "Example/Vendor/Compression/ZLib"]
 	path = Example/Vendor/Compression/ZLib
 	url = https://github.com/auroraengine/ZLib
