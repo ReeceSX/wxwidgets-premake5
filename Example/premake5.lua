@@ -52,6 +52,10 @@ workspace "WxExample Premake5"
 		}
     end
 
+    ---------------------------------------------------
+    -- TODO: ADD YOUR OWN PREPROCESSOR DEFINTIONS 
+    -- THE FOLLOWING TRASH IS JUST AN EXAMPLE
+    ---------------------------------------------------
     if (_G.win32) then
         defines "AURORA_PLATFORM_WIN32"
     elseif (_G.linux) then
@@ -59,6 +63,7 @@ workspace "WxExample Premake5"
     end
 
     defines "AURORA_ARCH_X64"
+    ---------------------------------------------------
 -------------------------------------------------------
 wxWidgets = require("wxwidgets-example")
 -------------------------------------------------------
@@ -89,7 +94,7 @@ function includeOSRuntime()
     elseif (_G.win32) then
         links "Comctl32.lib"
         links "Rpcrt4.lib"
-		links "Shlwapi.lib"
+        links "Shlwapi.lib"
     end
 end
 
