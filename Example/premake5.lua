@@ -145,10 +145,37 @@ boilerplateProject( "AuroraFreetype",
 defines "USE_HARFBUZZ=0"
 defines "FT_CONFIG_OPTION_SYSTEM_ZLIB=1"
 defines "FT2_BUILD_LIBRARY=1"
+
+-- Not required portable/tools
 excludes "Vendor/Graphics/freetype/src/lzw/**.c"
 excludes "Vendor/Graphics/freetype/src/gzip/**.c"
 excludes "Vendor/Graphics/freetype/src/tools/**.c"
 excludes "Vendor/Graphics/freetype/src/gxvalid/**.c"
+
+-- Single C files. Why? Single C file optimizer? Bad build chain? 
+-- Either way, we want the real file in our solution for debugging
+excludes "Vendor/Graphics/freetype/src/autofit/autofit.c"
+excludes "Vendor/Graphics/freetype/src/base/ftbase.c"
+excludes "Vendor/Graphics/freetype/src/bdf/bdf.c"
+excludes "Vendor/Graphics/freetype/src/bzip2/bzip2.c"
+excludes "Vendor/Graphics/freetype/src/cache/ftcache.c"
+excludes "Vendor/Graphics/freetype/src/cff/cff.c"
+excludes "Vendor/Graphics/freetype/src/cid/cidriver.c"
+excludes "Vendor/Graphics/freetype/src/truetype/truetype.c"
+excludes "Vendor/Graphics/freetype/src/smooth/smooth.c"
+excludes "Vendor/Graphics/freetype/src/sfnt/sfnt.c"
+excludes "Vendor/Graphics/freetype/src/raster/raster.c"
+excludes "Vendor/Graphics/freetype/src/psnames/psnames.c"
+excludes "Vendor/Graphics/freetype/src/pshinter/pshinter.c"
+excludes "Vendor/Graphics/freetype/src/psaux/psaux.c"
+excludes "Vendor/Graphics/freetype/src/pfr/pfr.c"
+excludes "Vendor/Graphics/freetype/src/pcf/pcf.c"
+excludes "Vendor/Graphics/freetype/src/otv/otv.c"
+excludes "Vendor/Graphics/freetype/src/otvalid/otvalid.c"
+excludes "Vendor/Graphics/freetype/src/type1/type1.c"
+excludes "Vendor/Graphics/freetype/src/type42/type42.c"
+excludes "Vendor/Graphics/freetype/src/winfonts/winfonts.c"
+
 includeProject("AuroraZLib")
 
 boilerplateProject( "AuroraHarfbuzz",
@@ -164,6 +191,7 @@ excludes "Vendor/Graphics/harfbuzz/src/hb-gdi.cc"
 excludes "Vendor/Graphics/harfbuzz/src/main.cc"
 excludes "Vendor/Graphics/harfbuzz/src/test.cc"
 excludes "Vendor/Graphics/harfbuzz/src/hb-gobject-structs.cc"
+excludes "Vendor/Graphics/harfbuzz/src/harfbuzz.cc" -- single cxx file :(
 
 defines "HAVE_FREETYPE=1"
 includeProject("AuroraFreetype")
