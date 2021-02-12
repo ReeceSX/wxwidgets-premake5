@@ -1563,11 +1563,11 @@ local GTK_LOWLEVEL_HDR = {
 	"wx/gtk/mimetype.h"
 };
 local GTK_SRC = {
-	"nullsrc/generic/accel.cpp",
-	"src/generic/fdrepdlg.cppsrc/generic/filepickerg.cpp",
+	"src/generic/accel.cpp",
+	"src/generic/fdrepdlg.cpp", "src/generic/filepickerg.cpp",
 	"src/generic/listctrl.cpp",
 	"src/generic/prntdlgg.cpp",
-	"src/generic/statusbr.cppsrc/gtk/anybutton.cpp",
+	"src/generic/statusbr.cpp", "src/gtk/anybutton.cpp",
 	"src/gtk/artgtk.cpp",
 	"src/gtk/bmpbuttn.cpp",
 	"src/gtk/button.cpp",
@@ -1625,11 +1625,13 @@ local GTK_SRC = {
 	"src/gtk/srchctrl.cpp"
 };
 local GTK2_SRC = {
-	"nullnullsrc/generic/accel.cpp",
-	"src/generic/fdrepdlg.cppsrc/generic/filepickerg.cpp",
+	"src/generic/accel.cpp",
+	"src/generic/fdrepdlg.cpp",
+    "src/generic/filepickerg.cpp",
 	"src/generic/listctrl.cpp",
 	"src/generic/prntdlgg.cpp",
-	"src/generic/statusbr.cppsrc/gtk/anybutton.cpp",
+	"src/generic/statusbr.cpp",
+    "src/gtk/anybutton.cpp",
 	"src/gtk/artgtk.cpp",
 	"src/gtk/bmpbuttn.cpp",
 	"src/gtk/button.cpp",
@@ -1684,7 +1686,7 @@ local GTK2_SRC = {
 	"src/gtk/dataview.cpp",
 	"src/gtk/bmpcbox.cpp",
 	"src/gtk/animate.cpp",
-	"src/gtk/srchctrl.cppsrc/generic/fontdlgg.cpp",
+	"src/gtk/srchctrl.cpp", "src/generic/fontdlgg.cpp",
 	"src/generic/activityindicator.cpp",
 	"src/gtk/eggtrayicon.c"
 };
@@ -1896,7 +1898,7 @@ local GTK1_LOWLEVEL_HDR = {
 	"wx/gtk1/window.h"
 };
 local GTK1_SRC = {
-	"nullsrc/generic/accel.cpp",
+	"src/generic/accel.cpp",
 	"src/generic/clrpickerg.cpp",
 	"src/generic/collpaneg.cpp",
 	"src/generic/colrdlgg.cpp",
@@ -1908,7 +1910,7 @@ local GTK1_SRC = {
 	"src/generic/fontpickerg.cpp",
 	"src/generic/listctrl.cpp",
 	"src/generic/prntdlgg.cpp",
-	"src/generic/statusbr.cppsrc/gtk1/bmpbuttn.cpp",
+	"src/generic/statusbr.cpp", "src/gtk1/bmpbuttn.cpp",
 	"src/gtk1/button.cpp",
 	"src/gtk1/checkbox.cpp",
 	"src/gtk1/checklst.cpp",
@@ -2027,7 +2029,7 @@ local MOTIF_LOWLEVEL_HDR = {
 	"wx/x11/region.h"
 };
 local MOTIF_SRC = {
-	"nullsrc/motif/accel.cpp",
+	"src/motif/accel.cpp",
 	"src/motif/app.cpp",
 	"src/motif/bmpbuttn.cpp",
 	"src/motif/bmpmotif.cpp",
@@ -2505,7 +2507,7 @@ local MSW_HDR = {
 	"wx/generic/activityindicator.h"
 };
 local MSW_RSC = {
-	"nullwx/msw/wx.manifest",
+	"wx/msw/wx.manifest",
 	"wx/msw/amd64.manifest",
 	"wx/msw/ia64.manifest",
 	"wx/msw/wx.rcwx/msw/colours.bmp",
@@ -2544,7 +2546,7 @@ local MSW_DESKTOP_HDR = {
 	"wx/msw/ole/uuid.h"
 };
 local DFB_LOWLEVEL_SRC = {
-	"nullsrc/common/fontmgrcmn.cpp",
+	"src/common/fontmgrcmn.cpp",
 	"src/generic/caret.cpp",
 	"src/generic/colour.cpp",
 	"src/generic/icon.cpp",
@@ -2554,7 +2556,7 @@ local DFB_LOWLEVEL_SRC = {
 	"src/dfb/app.cpp",
 	"src/dfb/bitmap.cpp",
 	"src/dfb/brush.cpp",
-	"src/dfb/cursor.cppsrc/dfb/dc.cpp",
+	"src/dfb/cursor.cpp", "src/dfb/dc.cpp",
 	"src/dfb/dcclient.cpp",
 	"src/dfb/dcmemory.cpp",
 	"src/dfb/dcscreen.cpp",
@@ -2600,7 +2602,7 @@ local DFB_LOWLEVEL_HDR = {
 	"wx/dfb/wrapdfb.h"
 };
 local OSX_SHARED_HDR = {
-	"nullwx/html/webkit.hwx/osx/accel.h",
+	"wx/html/webkit.hwx/osx/accel.h",
 	"wx/osx/anybutton.h",
 	"wx/osx/app.h",
 	"wx/osx/bitmap.h",
@@ -2763,8 +2765,8 @@ local OSX_COCOA_HDR = {
 	"wx/osx/datetimectrl.h"
 };
 local OSX_IPHONE_SRC = {
-	"null",
-	"src/generic/regiong.cppsrc/osx/iphone/anybutton.mm",
+	
+	"src/generic/regiong.cpp", "src/osx/iphone/anybutton.mm",
 	"src/osx/iphone/button.mm",
 	"src/osx/iphone/checkbox.mm",
 	"src/osx/iphone/dialog.mm",
@@ -2929,7 +2931,7 @@ local HTML_SRC_PLATFORM = {
 	"src/html/chm.cpp"
 };
 local HTML_CMN_SRC = {
-	"nullsrc/html/helpctrl.cpp",
+	"src/html/helpctrl.cpp",
 	"src/html/helpdata.cpp",
 	"src/html/helpdlg.cpp",
 	"src/html/helpfrm.cpp",
@@ -2952,12 +2954,13 @@ local HTML_CMN_SRC = {
 	"src/html/m_style.cpp",
 	"src/html/m_tables.cpp",
 	"src/html/styleparams.cpp",
-	"src/html/winpars.cppsrc/generic/htmllbox.cpp"
+	"src/html/winpars.cpp",
+    "src/generic/htmllbox.cpp"
 };
 local HTML_SRC = {
 	"src/msw/helpbest.cpp",
 	"src/html/chm.cpp",
-	"nullsrc/html/helpctrl.cpp",
+	"src/html/helpctrl.cpp",
 	"src/html/helpdata.cpp",
 	"src/html/helpdlg.cpp",
 	"src/html/helpfrm.cpp",
@@ -2980,11 +2983,12 @@ local HTML_SRC = {
 	"src/html/m_style.cpp",
 	"src/html/m_tables.cpp",
 	"src/html/styleparams.cpp",
-	"src/html/winpars.cppsrc/generic/htmllbox.cpp"
+	"src/html/winpars.cpp",
+    "src/generic/htmllbox.cpp"
 };
 local MSW_HTML_HDR = "wx/msw/helpbest.h";
 local HTML_CMN_HDR = {
-	"nullwx/html/helpctrl.h",
+	"wx/html/helpctrl.h",
 	"wx/html/helpdata.h",
 	"wx/html/helpdlg.h",
 	"wx/html/helpfrm.h",
@@ -3004,7 +3008,7 @@ local HTML_CMN_HDR = {
 	"wx/html/forcelnk.h"
 };
 local HTML_HDR = {
-	"nullwx/html/helpctrl.h",
+	"wx/html/helpctrl.h",
 	"wx/html/helpdata.h",
 	"wx/html/helpdlg.h",
 	"wx/html/helpfrm.h",
@@ -3826,7 +3830,7 @@ local GUI_HDR = {
 	"wx/msw/fontdlg.h",
 	"wx/msw/ole/automtn.h",
 	"wx/msw/ole/uuid.h",
-	"nullwx/msw/wx.manifest",
+	"wx/msw/wx.manifest",
 	"wx/msw/amd64.manifest",
 	"wx/msw/ia64.manifest",
 	"wx/msw/wx.rcwx/msw/colours.bmp",
